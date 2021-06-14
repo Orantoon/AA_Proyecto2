@@ -30,11 +30,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Casos/Caso 7/algoritmosCaso7" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Program.Main" />
+      <option name="MAIN_CLASS_NAME" value="program.Main" />
       <module name="AA_Proyecto2" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
@@ -73,7 +73,7 @@
       <workItem from="1623617378980" duration="77000" />
       <workItem from="1623641258584" duration="5000" />
       <workItem from="1623641318831" duration="332000" />
-      <workItem from="1623641659035" duration="3601000" />
+      <workItem from="1623641659035" duration="12132000" />
     </task>
     <servers />
   </component>
@@ -85,10 +85,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="640" y="275" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1623631327663" />
-    <state x="260" y="298" key="FileChooserDialogImpl" timestamp="1623641198836">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="347" y="298" key="FileChooserDialogImpl" timestamp="1623654366008">
+      <screen x="0" y="0" width="2560" height="1080" />
     </state>
     <state x="260" y="298" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1623641198836" />
+    <state x="347" y="298" key="FileChooserDialogImpl/0.0.2560.1080@0.0.2560.1080" timestamp="1623654366008" />
     <state width="1234" height="294" key="GridCell.Tab.0.bottom" timestamp="1623641202497">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
