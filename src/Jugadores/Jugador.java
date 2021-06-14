@@ -1,4 +1,4 @@
-package player;
+package Jugadores;
 
 import java.time.LocalTime;
 

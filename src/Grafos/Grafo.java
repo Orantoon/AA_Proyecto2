@@ -1,4 +1,6 @@
-package arena;
+package Grafos;
+
+import Arenas.ArenaNode;
 
 public class Grafo {
     public ArenaNode firstNode;

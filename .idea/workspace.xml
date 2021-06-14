@@ -34,7 +34,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="program.Main" />
+      <option name="MAIN_CLASS_NAME" value="Program.Main" />
       <module name="AA_Proyecto2" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
@@ -73,7 +73,7 @@
       <workItem from="1623617378980" duration="77000" />
       <workItem from="1623641258584" duration="5000" />
       <workItem from="1623641318831" duration="332000" />
-      <workItem from="1623641659035" duration="16561000" />
+      <workItem from="1623641659035" duration="18616000" />
     </task>
     <servers />
   </component>

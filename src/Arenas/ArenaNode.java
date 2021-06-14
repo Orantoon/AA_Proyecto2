@@ -1,4 +1,4 @@
-package arena;
+package Arenas;
 
 public class ArenaNode {
     public int id;
@@ -13,5 +13,7 @@ public class ArenaNode {
         percentage = (float) 0.0;
     }
 
-    public void print
+    public void print(){
+        System.out.println(id + "-" + percentage + "% <---> ");
+    }
 }
