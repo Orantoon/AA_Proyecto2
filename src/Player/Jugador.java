@@ -8,7 +8,7 @@ public class Jugador {
     public float creditos;
     public int totalPartidas;
     public LocalTime timezone;
-    //public Ticket ticket;
+    public Ticket ticket;
 
     public Jugador(){
         nickname = " ";
@@ -16,6 +16,6 @@ public class Jugador {
         creditos = (float) 1000.00;
         totalPartidas = 0;
         timezone = null;
-        //ticket = null;
+        ticket = null;
     }
 }
