@@ -1,4 +1,4 @@
-package Grafos;
+package Graphs;
 
 import Arenas.ArenaNode;
 
