@@ -39,19 +39,6 @@ public class Octopus {
     public int getTime() { return time; }
 }
 
-// genetic representation of a solution
-
-// function to generate new solutions (generations)
-
-// fitness function
-
-// selection function
-
-// crossover function
-
-// mutation function
-
-
 /*
 Check In: Nivel de energia a jugar (20 a 100)
 20  -> + daño al atacar, + rapido, - efectiva la defensa

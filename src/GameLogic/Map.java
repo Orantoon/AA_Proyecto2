@@ -3,7 +3,8 @@ package GameLogic;
 import java.util.Random;
 
 public class Map {
-    private int[][] matrix;
+    private final int[][] matrix;
+    private Octopus[] Octopuses;
     private final Random r = new Random();
 
     //Constructor
@@ -19,8 +20,10 @@ public class Map {
                 {0,0,0,0,0,0,0,0}
         };
 
+        Octopuses = Os;
+
         //assign random positions to the octopuses
-        for (Octopus o: Os)
+        for (Octopus o: Octopuses)
             addOctopus(o);
     }
 
