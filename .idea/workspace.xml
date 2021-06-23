@@ -23,12 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99c8ee09-f37e-4473-947e-3eb8018dad57" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/GameLogic/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/GameLogic/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/UI/UI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic/Octopus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/Octopus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Arenas/ArenaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Arenas/ArenaNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Graphs/Graph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Graphs/Graph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Graphs/NodeList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Graphs/NodeList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Ticket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/ProbabilisticA/NodeToNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/ProbabilisticA/NodeToNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/ProbabilisticA/PlayerToNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/ProbabilisticA/PlayerToNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Program/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Program/Menu.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,22 +65,35 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../2020 - II Semestre/.Programación Orientada a Objetos/Proyectos/POO_Proyecto2/ZombieDefense" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2\images" />
       <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2\src\UI" />
       <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2\src\ProbabilisticA" />
       <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2\src\ParallelsA" />
       <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2\src\Models" />
-      <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2\src\GeneticA" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jgamb\Desktop\TEC\2021 - I Semestre\Analisis de Algoritmos - Rodrigo Nuñez\AA_Proyecto2" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Game">
+  <component name="RunManager" selected="Application.UI">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="GameLogic.Game" />
       <module name="AA_Proyecto2" />
@@ -94,21 +111,8 @@
       </method>
     </configuration>
     <configuration name="UI" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="UI.GameUI" />
+      <option name="MAIN_CLASS_NAME" value="UI.UI" />
       <module name="AA_Proyecto2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -150,10 +154,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="194" width="1092" height="739" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624412850041">
+    <state x="414" y="194" width="1092" height="763" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624483223860">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="414" y="194" width="1092" height="739" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624412850041" />
+    <state x="414" y="194" width="1092" height="763" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624483223860" />
     <state x="765" y="255" key="#com.intellij.ide.util.MemberChooser" timestamp="1623728914432">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -170,56 +174,56 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="396" height="466" key="DebuggerActiveHint/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624415404710" />
-    <state x="260" y="298" key="FileChooserDialogImpl" timestamp="1624404610112">
+    <state x="260" y="298" key="FileChooserDialogImpl" timestamp="1624484254553">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="260" y="298" key="FileChooserDialogImpl/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624404610112" />
+    <state x="260" y="298" key="FileChooserDialogImpl/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624484254553" />
     <state x="260" y="298" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1623641198836" />
     <state x="347" y="298" key="FileChooserDialogImpl/0.0.2560.1080@0.0.2560.1080" timestamp="1623654366008" />
-    <state width="1877" height="62" key="GridCell.Tab.0.bottom" timestamp="1624433359160">
+    <state width="1877" height="129" key="GridCell.Tab.0.bottom" timestamp="1624487364138">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.bottom/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="62" key="GridCell.Tab.0.bottom/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624433359160" />
+    <state width="1877" height="129" key="GridCell.Tab.0.bottom/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624487364138" />
     <state width="1234" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="294" key="GridCell.Tab.0.bottom/0.0.2560.1080@0.0.2560.1080" timestamp="1623617453183" />
-    <state width="1877" height="62" key="GridCell.Tab.0.center" timestamp="1624433359160">
+    <state width="1877" height="129" key="GridCell.Tab.0.center" timestamp="1624487364137">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.center/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="62" key="GridCell.Tab.0.center/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624433359160" />
+    <state width="1877" height="129" key="GridCell.Tab.0.center/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624487364137" />
     <state width="1234" height="294" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="294" key="GridCell.Tab.0.center/0.0.2560.1080@0.0.2560.1080" timestamp="1623617453183" />
-    <state width="1877" height="62" key="GridCell.Tab.0.left" timestamp="1624433359159">
+    <state width="1877" height="129" key="GridCell.Tab.0.left" timestamp="1624487364137">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.left/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="62" key="GridCell.Tab.0.left/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624433359159" />
+    <state width="1877" height="129" key="GridCell.Tab.0.left/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624487364137" />
     <state width="1234" height="294" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="294" key="GridCell.Tab.0.left/0.0.2560.1080@0.0.2560.1080" timestamp="1623617453183" />
-    <state width="1877" height="62" key="GridCell.Tab.0.right" timestamp="1624433359160">
+    <state width="1877" height="129" key="GridCell.Tab.0.right" timestamp="1624487364137">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.right/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="62" key="GridCell.Tab.0.right/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624433359160" />
+    <state width="1877" height="129" key="GridCell.Tab.0.right/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624487364137" />
     <state width="1234" height="294" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="294" key="GridCell.Tab.0.right/0.0.2560.1080@0.0.2560.1080" timestamp="1623617453183" />
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1624415525061">
+    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1624434680732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624415525061" />
-    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1624415525061">
+    <state width="1877" height="363" key="GridCell.Tab.1.bottom/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624434680732" />
+    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1624434680732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.center/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624415525061" />
-    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1624415525061">
+    <state width="1877" height="363" key="GridCell.Tab.1.center/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624434680732" />
+    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1624434680732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.left/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624415525061" />
-    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1624415525061">
+    <state width="1877" height="363" key="GridCell.Tab.1.left/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624434680732" />
+    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1624434680732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.right/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624415525061" />
+    <state width="1877" height="363" key="GridCell.Tab.1.right/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624434680732" />
     <state x="664" y="431" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1623720220215">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
