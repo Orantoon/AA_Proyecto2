@@ -1,17 +1,20 @@
 package Program;
 
+import Graphs.Graph;
 import Graphs.NodeList;
 import Players.Player;
 import java.util.Scanner;
+import Players.Ticket;
+import java.text.ParseException;
 
 public class Menu {
 
-    public Menu(){
+    public Menu() throws ParseException {
         NodeList nodeList = new NodeList();
-        nodeList.initialize();
+        Graph graph = new Graph();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1. New Match");
+        System.out.println("1. Start");
         System.out.println("2. Exit");
         System.out.print("Enter an option: ");
 
@@ -21,6 +24,12 @@ public class Menu {
 
         if (opt == 1) {
             Player player = new Player();
+            player.nickname = "Joe";
+            player.ticket = new Ticket(32,6,2021);
+            player.timeZone = "EST";
+            player.fightSize = 3;
+            player.betPrice = 1000;
+            graph.playerToNode(player);
             // Set Inscription
             // Set Random Nickname
             // Key System
@@ -35,10 +44,12 @@ public class Menu {
             return;
         }
 
+        //graph.print();
+
         System.out.println("Thanks for playing!");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         new Menu();
     }
 }
