@@ -6,7 +6,7 @@ public class NodeList {   // All Nodes
     public ArenaNode firstNode;
 
     public NodeList(){
-        initialize();
+
     }
 
     public void initialize(){
@@ -29,5 +29,13 @@ public class NodeList {   // All Nodes
         tmp.nextN = new ArenaNode(9, "Lunes", "EST", 5, 100, "Avanzado");
         tmp = tmp.nextN;
         tmp.nextN = new ArenaNode(10, "Domingo", "AST", 3, 25, "Brutal");
+    }
+
+    public void cleanNodes(){
+        ArenaNode node = firstNode;
+        while (node != null){
+            node.clean();
+            node = node.nextN;
+        }
     }
 }

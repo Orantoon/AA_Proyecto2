@@ -10,7 +10,7 @@ public class Graph {
 
     public Graph(){
         nodeList = new NodeList();
-        playerToNode = new PlayerToNode();
+        playerToNode = new PlayerToNode(nodeList);
         nodeToNode = new NodeToNode();
     }
 }

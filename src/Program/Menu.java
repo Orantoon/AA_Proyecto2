@@ -1,15 +1,20 @@
 package Program;
 
+import Graphs.NodeList;
 import Players.Player;
 import java.util.Scanner;
 
 public class Menu {
-    private Scanner scanner = new Scanner(System.in);
 
     public Menu(){
+        NodeList nodeList = new NodeList();
+        nodeList.initialize();
+
+        Scanner scanner = new Scanner(System.in);
         System.out.println("1. New Match");
         System.out.println("2. Exit");
         System.out.print("Enter an option: ");
+
         int opt = scanner.nextInt();
 
         // Opcion de crear mas pantallas

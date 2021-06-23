@@ -78,17 +78,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Game">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="GameLogic.Game" />
       <module name="AA_Proyecto2" />
@@ -108,6 +97,19 @@
     <configuration name="UI" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="UI.UI" />
       <module name="AA_Proyecto2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -227,10 +229,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="803" y="297" key="refactoring.ChangeSignatureDialog/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624415705496" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1623807465653">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="831" y="235" width="896" height="678" key="search.everywhere.popup" timestamp="1624426746137">
+      <screen x="0" y="0" width="2560" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1623807465653" />
+    <state x="831" y="235" width="896" height="678" key="search.everywhere.popup/0.0.2560.1080@0.0.2560.1080" timestamp="1624426746137" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

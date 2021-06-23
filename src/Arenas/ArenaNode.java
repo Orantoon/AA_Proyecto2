@@ -1,12 +1,18 @@
 package Arenas;
 
+import Players.PlayerList;
+
+import java.util.Vector;
+
 public class ArenaNode {
     // Characteristics
+    public PlayerList playerList;
+
     public int id;
     public String ticketDay;
     public String timeZone;
     public int fightSize;
-    public int amount;
+    public int betPrice;
     public String experience;
     public int total;
 
@@ -14,23 +20,42 @@ public class ArenaNode {
     public ArenaNode nextN;
 
     // Graph
-    public ArenaNode back;
-    public ArenaNode next;
+    public Vector<ArenaNode> adjacent;
     public float percentage;
 
-    public ArenaNode(int id, String ticketDay, String timeZone, int fightSize, int amount, String experience){
+    // Scroll
+    public ArenaNode back;
+    public ArenaNode next;
+
+    public ArenaNode(int id, String ticketDay, String timeZone, int fightSize, int betPrice, String experience){
+        playerList = new PlayerList();
+
         this.id = id;
         this.ticketDay = ticketDay;
         this.timeZone = timeZone;
         this.fightSize = fightSize;
-        this.amount = amount;
+        this.betPrice = betPrice;
         this.experience = experience;
         this.total = 0;
 
-        back = null;
-        next = null;
+        nextN = null;
+
+        adjacent = new Vector<ArenaNode>();
         percentage = (float) 0.0;
 
-        nextN = null;
+        back = null;
+        next = null;
+    }
+
+    public void clean(){
+        playerList = new PlayerList();
+
+        total = 0;
+
+        adjacent = new Vector<ArenaNode>();
+        percentage = (float) 0.0;
+
+        back = null;
+        next = null;
     }
 }
