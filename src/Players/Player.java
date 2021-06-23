@@ -1,7 +1,5 @@
 package Players;
 
-import Arenas.ArenaNode;
-
 public class Player {
     public String nickname;
     public float credits;
@@ -16,9 +14,9 @@ public class Player {
     public Player next;
 
     public Player(){
-        nickname = " ";
+        nickname = null;
         credits = (float) 1000.00;
-        inscription = " ";
+        inscription = null;
         ticket = null;
 
         timeZone = null;

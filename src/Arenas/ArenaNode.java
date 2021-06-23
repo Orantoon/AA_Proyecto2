@@ -1,12 +1,12 @@
 package Arenas;
 
-import Players.PlayerList;
+import Players.Player;
 
 import java.util.Vector;
 
 public class ArenaNode {
     // Characteristics
-    public PlayerList playerList;
+    public Vector<Player> playerList;
 
     public int id;
     public String ticketDay;
@@ -17,7 +17,8 @@ public class ArenaNode {
     public int total;
 
     // NodeList
-    public ArenaNode nextN;
+    public ArenaNode nextN; // Node List
+    public ArenaNode nextU; // Used Nodes
 
     // Graph
     public Vector<ArenaNode> adjacent;
@@ -28,7 +29,7 @@ public class ArenaNode {
     public ArenaNode next;
 
     public ArenaNode(int id, String ticketDay, String timeZone, int fightSize, int betPrice, String experience){
-        playerList = new PlayerList();
+        playerList = new Vector<Player>();
 
         this.id = id;
         this.ticketDay = ticketDay;
@@ -39,6 +40,7 @@ public class ArenaNode {
         this.total = 0;
 
         nextN = null;
+        nextU = null;
 
         adjacent = new Vector<ArenaNode>();
         percentage = (float) 0.0;
@@ -48,7 +50,7 @@ public class ArenaNode {
     }
 
     public void clean(){
-        playerList = new PlayerList();
+        playerList = new Vector<Player>();
 
         total = 0;
 
@@ -57,5 +59,20 @@ public class ArenaNode {
 
         back = null;
         next = null;
+    }
+
+    public void print(){
+        System.out.println("=================");
+        System.out.println("Nodo " + id);
+        System.out.println("Nodos Adyacentes:");
+        for (int i = 0; i < adjacent.size(); i++)
+            System.out.print(adjacent.get(i).id + " ");
+        System.out.println();
+        System.out.println("Users In:");
+        for (int i = 0; i < playerList.size(); i++){
+            System.out.print(playerList.get(i).nickname);
+            System.out.println();
+        }
+        System.out.println();
     }
 }

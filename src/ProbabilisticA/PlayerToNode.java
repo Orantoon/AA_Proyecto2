@@ -18,8 +18,9 @@ public class PlayerToNode {
         RandomNum random = new RandomNum();
         int total = sumAllNodes(player);
         int value = random.getRandom(100);
+        //System.out.println("Random = " + value);
         int sum = 0;
-        setPercentages(player, total);
+        setPercentagesP(player, total);
 
         ArenaNode tmp = nodeList.firstNode;
         while(tmp != null){
@@ -36,7 +37,7 @@ public class PlayerToNode {
         ArenaNode tmp = nodeList.firstNode;
         while(tmp != null){
             if (tmp.id == id){
-                tmp.playerList.addPlayer(player);
+                tmp.playerList.add(player);
                 tmp.total += 1;
                 break;
             }
@@ -44,12 +45,14 @@ public class PlayerToNode {
         }
     }
 
-    public void setPercentages(Player player, int total) throws ParseException {
+    public void setPercentagesP(Player player, int total) throws ParseException {
         ArenaNode tmp = nodeList.firstNode;
         while(tmp != null){
             tmp.percentage = (float) (compPlayerNode(tmp,player) * 100) / total;
+            //System.out.println("Node " + tmp.id + " -> " + tmp.percentage);
             tmp = tmp.nextN;
         }
+        //System.out.println();
     }
 
     public int sumAllNodes(Player player) throws ParseException {
