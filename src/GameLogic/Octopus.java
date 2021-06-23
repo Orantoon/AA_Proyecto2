@@ -6,7 +6,7 @@ public class Octopus {
     private final int id;
     private final int[] attributes; //Life, attack, speed/turns
     private int[] position;
-    private int time;
+    private long time;
 
 
     public Octopus(int energy, int id){ //energy from 20 to 100 //ids must start from 1 to X
@@ -16,7 +16,7 @@ public class Octopus {
     }
 
 
-    public void decreaseLife(int att, Map map, int time){
+    public void decreaseLife(int att, Map map, long starttime){
         attributes[0] -= att;
 
         System.out.println("Damage");
@@ -24,14 +24,14 @@ public class Octopus {
         if (attributes[0] <= 0){ //validate if Octopus is dead
             map.setMatrixSpace(position[0], position[1], 0);
             map.deadOctopus();
-            this.time = time; //Global variable
+            setTime(starttime);
             System.out.println("Dead");
         }
     }
 
 
     /** Decreases the life of the enemy */
-    public void attack(int row, int col, Map map, int time){
+    public void attack(int row, int col, Map map, long starttime){
 
         //Validation of not a valid space
         if (row < 0 || col < 0 || row >= map.getMatrix().length || col >= map.getMatrix().length || (Arrays.equals(position, new int[]{row, col}))){
@@ -44,7 +44,7 @@ public class Octopus {
         Octopus o = map.getOctopus(map.getMatrix()[row][col]);
 
         if (o != null)
-            o.decreaseLife(attributes[1], map, time);
+            o.decreaseLife(attributes[1], map, starttime);
     }
 
 
@@ -64,7 +64,7 @@ public class Octopus {
 
 
     /** Selects the choice depending on the genotype */
-    public void choose(char genotype, Map map, int time){
+    public void choose(char genotype, Map map, long starttime){
 
         int row = ((genotype >= 126) ? genotype-126 : genotype) / 42 - 1, col = (genotype%42)/14 - 1;
         row += this.position[0]; col += this.position[1];
@@ -72,7 +72,7 @@ public class Octopus {
         if (genotype >= 126)
             move(row, col, map);
         else
-            attack(row, col, map, time);
+            attack(row, col, map, starttime);
 
     }
 
@@ -85,8 +85,10 @@ public class Octopus {
     public int[] getPosition(){ return position; }
     public int getId(){ return id; }
     public int getLife(){ return attributes[0]; }
+    public int getAttack() {return  attributes[1]; }
     public int getPlays(){ return attributes[2]; }
-    public int getTime() { return time; }
+    public long getTime() { return time; }
+    public void setTime(long starttime){ time = System.nanoTime() - starttime; }
 }
 
 /* Pulpo que llega a 0 de energia muere y se guarda el tiempo que duro */

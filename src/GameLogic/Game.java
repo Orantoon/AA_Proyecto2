@@ -1,17 +1,21 @@
 package GameLogic;
 
 import GeneticA.GeneticAlgorithm;
-import UI.UI;
+import UI.GameUI;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
 
-    public Game(Vector<Octopus> octopuses, int id) throws InterruptedException {
+    public Game(Vector<Octopus> octopuses, int id) throws InterruptedException, IOException, FontFormatException {
         Map map = new Map(octopuses);
-        UI ui = new UI(map, id);
+        GameUI gameUi = new GameUI();
         int turns, alive;
+
+        long starttime = System.nanoTime();
 
         do {
             alive = map.getAlive();
@@ -23,15 +27,13 @@ public class Game {
                 turns = o.getPlays();
 
                 while (turns != 0){
-                    //System.out.println(o.getId());
-
-                    ui.updateFrame(map, id);
+                    gameUi.updateFrame(map, id);
 
                     TimeUnit.MICROSECONDS.sleep(50000);
 
                     GeneticAlgorithm GA = new GeneticAlgorithm(o, map);
                     char gen = GA.getBestSolution();
-                    o.choose(gen, map, 0); //change TIME //////////////////////////////////////////////////////////
+                    o.choose(gen, map, starttime); //change TIME //////////////////////////////////////////////////////////
 
                     turns--;
                 }
@@ -42,27 +44,25 @@ public class Game {
 
         for (Octopus o : octopuses){
             if (o.getLife() > 0)
-                System.out.println("Winner " + o.getId());
+                o.setTime(starttime);
+            System.out.println("Id: " + o.getId() + " Time: " + o.getTime());
         }
-
-
-        // Game loop -- Turns -> Multiple G.A.
-        // Actions
-
-        // End Game
-
-        // TEXT
-        // Visual Part -- FULL MAP
-        // Visual Part -- POV Octopus
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException, FontFormatException {
         Vector<Octopus> os = new Vector<>();
         os.add(new Octopus(20, 1));
         os.add(new Octopus(100, 2));
-        os.add(new Octopus(20, 3));
-        new Game(os, 3);
+        os.add(new Octopus(30, 3));/*
+        os.add(new Octopus(40, 4));
+        os.add(new Octopus(20, 5));
+        os.add(new Octopus(100, 6));
+        os.add(new Octopus(30, 7));
+        os.add(new Octopus(40, 8));
+        os.add(new Octopus(30, 9));
+        os.add(new Octopus(40, 10));*/
+        new Game(os, 2);
     }
 
 
