@@ -1,7 +1,6 @@
 package Program;
 
 import Players.Player;
-
 import java.util.Scanner;
 
 public class Menu {

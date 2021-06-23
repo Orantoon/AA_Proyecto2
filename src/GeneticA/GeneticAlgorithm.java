@@ -37,6 +37,7 @@ public class GeneticAlgorithm {
 
         //Generate Gen 0 -- Randoms
 		for (int i = 0; i < size; i++){
+			population[i] = new Solution();
 			population[i].genotype = (char) r.nextInt(255); //1111 1111
 			fitness(population[i]);
 		}
@@ -60,18 +61,21 @@ public class GeneticAlgorithm {
 		row += oct.getPosition()[0]; col += oct.getPosition()[1];
 
 		//Validate row & cols are part of the matrix
-		valid = (row < -1 || row >= matrix.length)? 0 : 1;
-		valid *= (col < -1 || col >= matrix.length)? 0 : 1;
+		valid = (row < 0 || row >= matrix.length)? 0 : 1;
+		valid *= (col < 0 || col >= matrix.length)? 0 : 1;
+
+		if (valid == 0){
+			sol.fitness = -100000; //-1000000000
+			return;
+		}
 
 		//Enemy Health
 		Octopus enemy = map.getOctopus(matrix[row][col]);
-		EnemyHealth = (enemy != null)? enemy.getLife() : 100000;
-		EnemyHealth *= (enemy != null)? ((enemy.getId() == oct.getId())? -1 : 1): -1; //So it doesn't attacks itself
+		EnemyHealth = (enemy != null)? enemy.getLife() : 200;
+		EnemyHealth *= (enemy != null)? ((enemy.getId() == oct.getId())? -1 : 1): -1; //So it doesn't attacks itself //-1
 
 		//Fitness
 		sol.fitness = (1 - sol.genotype/126) * ( (double) 10 / EnemyHealth) + sol.genotype/126 * (-5 * matrix[row][col] + 1);
-		sol.fitness *= valid;
-
 	}
 
 

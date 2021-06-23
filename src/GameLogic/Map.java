@@ -1,15 +1,16 @@
 package GameLogic;
 
 import java.util.Random;
+import java.util.Vector;
 
 public class Map {
     private final int[][] matrix;
-    private Octopus[] Octopuses;
+    private Vector<Octopus> Octopuses;
     private final Random r = new Random();
-
+    private int alive;
 
     //Constructor
-    public Map(Octopus[] Os){
+    public Map(Vector<Octopus> Os){
         matrix = new int[][]{
                 {0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0},
@@ -22,6 +23,7 @@ public class Map {
         };
 
         Octopuses = Os;
+        alive = Os.size();
 
         //assign random positions to the octopuses
         for (Octopus o: Octopuses)
@@ -54,4 +56,7 @@ public class Map {
     //Getters
     public int[][] getMatrix() { return matrix; }
     public void setMatrixSpace(int row, int col, int id) { matrix[row][col] = id; }
+    public Vector<Octopus> getOctopuses() { return Octopuses;}
+    public int getAlive() { return alive; }
+    public void deadOctopus() { alive--; }
 }
