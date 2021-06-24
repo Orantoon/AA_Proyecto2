@@ -52,9 +52,9 @@ public class Game {
 
     public static void main(String[] args) throws InterruptedException, IOException, FontFormatException {
         Vector<Octopus> os = new Vector<>();
-        os.add(new Octopus(20, 1));
-        os.add(new Octopus(100, 2));
-        os.add(new Octopus(30, 3));/*
+        os.add(new Octopus(50, 1));
+        os.add(new Octopus(20, 2));
+        os.add(new Octopus(60, 3));/*
         os.add(new Octopus(40, 4));
         os.add(new Octopus(20, 5));
         os.add(new Octopus(100, 6));
