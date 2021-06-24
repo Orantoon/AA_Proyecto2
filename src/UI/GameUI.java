@@ -16,8 +16,8 @@ public class GameUI {
     private final JPanel textP = new JPanel();
 
     //Images
-    private final JLabel bg = new JLabel(new ImageIcon("images/arena.png"));
-    private final JLabel tbg = new JLabel(new ImageIcon("images/textbg.png"));
+    private final JLabel bg = new JLabel(new ImageIcon("images/fightbg.png")); //"images/arena.png"
+    private final JLabel tbg = new JLabel(new ImageIcon("images/textbg3.png"));
     private final ImageIcon[] octopusImgs = new ImageIcon[10];
 
     //Font
@@ -61,7 +61,8 @@ public class GameUI {
         textP.setLayout(null);
         textP.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
 
-        tbg.setBounds(0,0, ArenaSize, ArenaSize);
+        tbg.setBounds(0,0, 385, ArenaSize);
+        tbg.setLayout(null);
     }
 
     public void initImgs(){

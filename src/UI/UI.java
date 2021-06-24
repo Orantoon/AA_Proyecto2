@@ -98,14 +98,6 @@ public class UI {
         tTitle.setBounds(270,30, 400, 40);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
-        ActionListener NewTab = e -> {
-            try {
-                new UI();
-            } catch (IOException | FontFormatException ioException) {
-                ioException.printStackTrace();
-            }
-        };
-
         ActionListener EXIT = e -> System.exit(0);
         ActionListener Register = e -> registerScreen();
         ActionListener LogIn = e -> logInScreen();
@@ -131,18 +123,11 @@ public class UI {
         bExit.setBounds(335,215 + space*2,smallSize[0],smallSize[1]);
         bExit.addActionListener(EXIT);
 
-        JButton bNew = new JButton(bigB);
-        bNew.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'>New Tab</p></html>");
-        bNew.setHorizontalTextPosition(SwingConstants.CENTER);
-        bNew.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
-        bNew.addActionListener(NewTab);
-
         //Add to Panel
         panel.add(tTitle);
         panel.add(bLogIn);
         panel.add(bReg);
         panel.add(bExit);
-        panel.add(bNew);
 
         refreshFrame(startbg);
     }
@@ -258,7 +243,7 @@ public class UI {
         int space = 70;
 
         //Text
-        tTitle.setText("<html>Welcome to the family<br><center>" + nickname + "!</center></html>");
+        tTitle.setText("<html>Welcome to the Octopi<br><center>" + nickname + "!</center></html>");
         tTitle.setBounds(200,30, 600, 60);
 
         tNick.setText("<html>Nickname: " + nickname + "</html>");
@@ -338,7 +323,7 @@ public class UI {
         bBack.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
         bBack.addActionListener(Start);
 
-        bBack.setEnabled(!done);
+        //bBack.setEnabled(!done);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Mouse Listener -- SCROLL
         MouseWheelListener scroll = e -> System.out.println(e.getWheelRotation()); //-1 UP <> 1 DOWN --> Use to move around the graph
@@ -441,10 +426,13 @@ public class UI {
     }
 
     public void fightResultsScreen(){ //7
+        cleanFrame();
 
+
+        refreshFrame(endgamebg);
     }
 
-    ActionListener Start = e -> startScreen();
+    ActionListener Start = e -> startScreen(); //Goes to the start
 
 
     public static void main(String[] args) throws IOException, FontFormatException {
@@ -452,3 +440,12 @@ public class UI {
     }
 
 }
+
+/*
+Price? In arenas
+Number of Players?
+
+done/check in confirmation for each user
+Vector of Octopus for each arena
+
+ */
