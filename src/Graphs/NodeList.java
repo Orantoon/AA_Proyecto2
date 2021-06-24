@@ -6,7 +6,7 @@ public class NodeList {   // All Nodes
     public ArenaNode firstNode;
 
     public NodeList(){
-
+        initialize();
     }
 
     public void initialize(){
@@ -37,5 +37,47 @@ public class NodeList {   // All Nodes
             node.clean();
             node = node.nextN;
         }
+    }
+
+    public int nodeAmount(){
+        int res = 0;
+        ArenaNode tmp = firstNode;
+        while(tmp != null){
+            res += 1;
+            tmp = tmp.nextN;
+        }
+        return res;
+    }
+
+    public void addNode(ArenaNode node){
+        if (firstNode == null)
+            firstNode = node;
+        else{
+            ArenaNode tmp = firstNode;
+            while(tmp.nextN != null){
+                tmp = tmp.nextN;
+            }
+            tmp.nextN = node;
+        }
+    }
+
+    public boolean isInList(ArenaNode node){
+        ArenaNode tmp = firstNode;
+        while(tmp != null){
+            if (tmp.id == node.id)
+                return true;
+            tmp = tmp.nextN;
+        }
+        return false;
+    }
+
+    public void print(){
+        System.out.println("=== Node List ===");
+        System.out.println();
+        ArenaNode tmp = firstNode;
+        while(tmp != null){
+            System.out.println(tmp.id);
+            tmp = tmp.nextN;
+        } System.out.println();
     }
 }
