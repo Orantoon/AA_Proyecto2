@@ -379,7 +379,8 @@ public class UI {
             else
                 scrollList.back();
 
-            System.out.println(scrollList.currentNode.id);
+            //System.out.println(scrollList.currentNode.id);
+            updateScroll();
         };
 
 
@@ -396,6 +397,75 @@ public class UI {
         panel.add(tCounter);
         panel.add(tCheckIn);
         panel.addMouseWheelListener(scroll);
+        panel.add(bCheckIn);
+        panel.add(bBack);
+
+        refreshFrame(scrollbg);
+    }
+
+    public void updateScroll(){
+        cleanFrame();
+
+        //Data
+        long time = 1;  // ??????????
+        // numOfPlayers  ---- scrollList.currentNode.total
+
+        int space = 70;
+
+        //Text
+        tTitle.setText("Scroll Through Arenas");
+        tTitle.setBounds(200,30, 600, 60);
+
+        tCredits.setText("Credits: " + player.credits); //Must Because it can change
+
+        JLabel tPrice = new JLabel("<html>Price: " + scrollList.currentNode.betPrice +"</html>");
+        tPrice.setFont(font.deriveFont(16f)); tPrice.setForeground(Color.WHITE);
+        tPrice.setBounds(200, 30 + (int) (space*1.5), 300, 30);
+
+        JLabel tCounter = new JLabel("<html>Time Remaining: " + time +"</html>");
+        tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
+        tCounter.setBounds(200, 30+space*2, 300, 30);
+
+        char symbol = (player.checkInReady)? '✓': 'X';
+        JLabel tCheckIn = new JLabel("<html>Check-in done: " + symbol +"</html>");
+        tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
+        tCheckIn.setBounds(200, 30+(int) (space*2.5), 300, 30);
+
+
+
+        // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
+        ActionListener Check_In = e -> checkInScreen();
+
+        //Buttons
+        JButton bCheckIn = new JButton(bigB);
+        bCheckIn.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'>Check In</p></html>");
+        bCheckIn.setHorizontalTextPosition(SwingConstants.CENTER);
+        bCheckIn.setBounds(335 - smallSize[0]/2,215 + space*2,bigSize[0],bigSize[1]);
+        bCheckIn.addActionListener(Check_In);
+
+        bCheckIn.setEnabled(!player.checkInReady);
+
+        JButton bBack = new JButton(bigB);
+        bBack.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'> Back </p></html>");
+        bBack.setHorizontalTextPosition(SwingConstants.CENTER);
+        bBack.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
+        bBack.addActionListener(Start);
+
+        //bBack.setEnabled(!done);
+
+
+
+
+        // / / / / / / / / / / / / / / / / / / / / / / / Start Fight -- Time == 0 -- Time = FIGHTTIME - CURRENTTIME
+
+
+        //Panel
+        panel.add(tTitle);
+        panel.add(tNick);
+        panel.add(tCredits);
+        panel.add(tPrice);
+        panel.add(tCounter);
+        panel.add(tCheckIn);
         panel.add(bCheckIn);
         panel.add(bBack);
 
