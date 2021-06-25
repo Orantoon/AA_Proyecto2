@@ -13,6 +13,7 @@ public class Graph {
 
     public Graph(){
         nodeList = new NodeList();
+        nodeList.cleanNodes();      // Cleans the players out of the arenas
         playerToNode = new PlayerToNode(nodeList);
         nodeToNode = new NodeToNode(nodeList);
 

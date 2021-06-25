@@ -39,6 +39,7 @@ public class PlayerToNode {
             if (tmp.id == id){
                 tmp.playerList.add(player);
                 tmp.total += 1;
+                player.arena = tmp;
                 break;
             }
             tmp = tmp.nextN;

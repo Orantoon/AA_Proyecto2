@@ -1,9 +1,12 @@
 package Players;
 
+import Arenas.ArenaNode;
+
 public class Player {
     public String nickname;
     public float credits;
     public String inscription;
+    public boolean checkInReady;
     public Ticket ticket;
 
     public String timeZone;
@@ -11,18 +14,23 @@ public class Player {
     public int betPrice;
     public int matchesPlayed;
 
+    public ArenaNode arena;
+
     public Player next;
 
     public Player(){
         nickname = null;
         credits = (float) 1000.00;
         inscription = null;
+        checkInReady = false;
         ticket = null;
 
         timeZone = null;
         fightSize = 0;
         betPrice = 0;
         matchesPlayed = 0;
+
+        arena = null;
 
         next = null;
     }
