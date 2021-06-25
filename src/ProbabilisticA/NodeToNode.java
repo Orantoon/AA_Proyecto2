@@ -2,16 +2,17 @@ package ProbabilisticA;
 
 import Arenas.ArenaNode;
 import Graphs.NodeList;
-import Graphs.UsedNodes;
 import Utils.RandomNum;
+
+import java.util.Vector;
 
 public class NodeToNode {
     public NodeList nodeList;
-    public UsedNodes usedNodes;
+    public Vector<ArenaNode> usedNodes;
 
     public NodeToNode(NodeList nodeList){
             this.nodeList = nodeList;
-            usedNodes = new UsedNodes();
+            usedNodes = new Vector<ArenaNode>();
         }
 
         public void mainProcess(){
@@ -26,7 +27,7 @@ public class NodeToNode {
             cleanArenas();
             RandomNum random = new RandomNum();
             int nodeAmount = random.getRandom(nodeList.nodeAmount() - 1);
-            usedNodes.addNode(node);
+            usedNodes.add(node);
 
             while (nodeAmount > 0){
                 doNode(node, random);
@@ -45,7 +46,7 @@ public class NodeToNode {
                 sum += tmp.percentage;
                 if (value <= sum){
                     connectNodes(tmp,node);
-                    usedNodes.addNode(tmp);
+                    usedNodes.add(tmp);
                     return;
                 }
                 tmp = tmp.nextN;
@@ -79,7 +80,7 @@ public class NodeToNode {
         public int compNodeNode(ArenaNode arena, ArenaNode node){
             int res = 0;
 
-            if (!usedNodes.isInList(arena)){   // Same node, 0% chance of getting it
+            if (!usedNodes.contains(arena)){   // Same node, 0% chance of getting it
                 if (arena.ticketDay.equals(node.ticketDay))
                     res += 7;
                 if (arena.timeZone.equals(node.timeZone))
@@ -96,13 +97,13 @@ public class NodeToNode {
             return res;
         }
 
-        public void cleanArenas(){  // Leaves all arenas in 0 percentage and cleans the UsedNodes List
+        public void cleanArenas(){  // Leaves all arenas in 0 percentage and cleans the usedNodes List
             ArenaNode tmp = nodeList.firstNode;
             while(tmp != null){
                 tmp.percentage = (float) 0.0;
                 tmp.nextU = null;
                 tmp = tmp.nextN;
             }
-            usedNodes = new UsedNodes();
+            usedNodes.clear();
         }
     }

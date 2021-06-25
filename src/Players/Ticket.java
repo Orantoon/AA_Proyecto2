@@ -7,19 +7,36 @@ import java.util.Date;
 
 public class Ticket {
     public int[] date = new int[3];
+    public int[] time = new int[3];
 
-    public Ticket(int day, int month, int year){
-        date[0] = day;
-        date[1] = month;
-        date[2] = year;
+    public Ticket(int weekDate){
+        newDate(weekDate);
+
+        time[0] = 15;   // 03 : 00 : 00 pm
+        time[1] = 0;
+        time[2] = 0;
+    }
+
+    public void newDate(int weekDate){
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.add(Calendar.DATE, 1);
+        while (calendar.get(Calendar.DAY_OF_WEEK) != 1){    // First day of next week
+            calendar.add(Calendar.DATE, 1);
+        }
+        calendar.add(Calendar.DATE, weekDate - 1);  // Date of next week
+
+        date[0] = calendar.get(Calendar.DATE);
+        date[1] = calendar.get(Calendar.MONTH);
+        date[2] = calendar.get(Calendar.YEAR);
     }
 
     public String weekDate() throws ParseException {
         String sdate = date[0]+"/"+date[1]+"/"+date[2];
         Date ndate = new SimpleDateFormat("dd/M/yyyy").parse(sdate);
-        Calendar c = Calendar.getInstance();
-        c.setTime(ndate);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(ndate);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
         return switch (dayOfWeek) {
             case 1 -> "Domingo";
@@ -32,5 +49,12 @@ public class Ticket {
             default -> "ERROR";
         };
 
+    }
+
+    public void print(){
+        System.out.println("=== Ticket ===");
+        System.out.println("Date: " + date[0] + "/" + date[1] + "/" + date[2]);
+        System.out.println("Time: " + time[0] + ":" + time[1] + ":" + time[2]);
+        System.out.println();
     }
 }

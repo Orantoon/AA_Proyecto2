@@ -1,10 +1,17 @@
 package UI;
 
+import Graphs.Graph;
+import Graphs.ScrollList;
+import Players.Player;
+import Players.Ticket;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.PlatformLoggingMXBean;
+import java.text.ParseException;
 
 public class UI {
     //Frame and panels
@@ -38,14 +45,16 @@ public class UI {
     private final JLabel tCredits = new JLabel();
 
     //Variables
-    private String paragraph;
-    private String nickname;
-    private int credits;
-    private boolean done = false;
+    private Player player;
+    private Graph graph;
+    private ScrollList scrollList;
+    private int ticketDate;
 
     private final int WindowSize = 768;
 
     public UI() throws IOException, FontFormatException {
+        graph = new Graph();    // Graph is created and connected
+
         int Width = WindowSize + 14, Height = WindowSize + 35;
 
         frame.setTitle("Menu");
@@ -95,11 +104,17 @@ public class UI {
 
         //Text
         tTitle.setText("OCTOPUS ARENA");
-        tTitle.setBounds(270,30, 400, 40);
+        tTitle.setBounds(270, 30, 400, 40);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener EXIT = e -> System.exit(0);
-        ActionListener Register = e -> registerScreen();
+        ActionListener Register = e -> {
+            try {
+                registerScreen();
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+        };
         ActionListener LogIn = e -> logInScreen();
 
         //Buttons
@@ -149,10 +164,28 @@ public class UI {
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Continue = e -> {
-            //gets the data of the user -> nickname, credits
+            player = new Player();
+            //player = findplayer();
+            //gets the data of the player -> nickname, credits
             //if username incorrect ->
             //getNick.setText("Incorrect Username, Try Again...");
             //else
+
+            player.ticket = new Ticket(ticketDate); // New Ticket
+            if (ticketDate == 7)
+                ticketDate = 1;
+            else
+                ticketDate += 1;
+
+
+            try {
+                graph.playerToNode(player);
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+
+            scrollList = new ScrollList(player.arena, graph.nodeList);
+
             scrollScreen();
         };
 
@@ -178,17 +211,17 @@ public class UI {
         refreshFrame(loginbg);
     }
 
-    public void registerScreen(){ //2
+    public void registerScreen() throws ParseException { //2
         cleanFrame();
 
         //Data
-        credits = 100;
+        player = new Player();
 
         //Text
         tTitle.setText("REGISTER");
         tTitle.setBounds(315,30, 400, 40);
 
-        tCredits.setText("Credits: " + credits);
+        tCredits.setText("Credits: " + player.credits);
         tCredits.setBounds(600, 15, 300, 30);
 
         int space = 70;
@@ -202,15 +235,30 @@ public class UI {
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Continue = e -> {
-            paragraph = textArea.getText();
+            player.inscription = textArea.getText();
 
-            if (paragraph.length() <= 10){
+            if (player.inscription.length() <= 10){
                 textArea.setText("Your description must be at lest 10 characters long...");
                 return;
             }
 
-            nickname = "John"; String ticket = "0001A";
-            nicknameScreen(credits, ticket);
+            player.ticket = new Ticket(ticketDate); // New Ticket
+            if (ticketDate == 7)
+                ticketDate = 1;
+            else
+                ticketDate += 1;
+
+
+            try {
+                graph.playerToNode(player);
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+
+            scrollList = new ScrollList(player.arena, graph.nodeList);
+
+            //player.nickname = "John"; String ticket = "0001A";
+            nicknameScreen();
 
         };
 
@@ -237,22 +285,22 @@ public class UI {
         refreshFrame(regbg);
     }
 
-    public void nicknameScreen(int credits, String ticket){ //3
+    public void nicknameScreen(){ //3
         cleanFrame();
 
         int space = 70;
 
         //Text
-        tTitle.setText("<html>Welcome to the Octopi<br><center>" + nickname + "!</center></html>");
+        tTitle.setText("<html>Welcome to the Octopi<br><center>" + player.nickname + "!</center></html>");
         tTitle.setBounds(200,30, 600, 60);
 
-        tNick.setText("<html>Nickname: " + nickname + "</html>");
+        tNick.setText("<html>Nickname: " + player.nickname + "</html>");
         tNick.setBounds(20, 15, 300, 30);
 
-        tNormal.setText("<html>Next Ticket:" + ticket + "</html>");
+        tNormal.setText("<html>Next Ticket:" + player.ticket + "</html>");     // Fecha y hora
         tNormal.setBounds(200, 30+(int)(space*1.5), 300, 30);
 
-        tCredits.setText("Credits: " + credits); //A must if it's loading an existing user
+        tCredits.setText("Credits: " + player.credits); //A must if it's loading an existing user
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Continue = e -> scrollScreen();
@@ -277,10 +325,8 @@ public class UI {
         cleanFrame();
 
         //Data
-        credits = 100;
-        int price = 0;
-        long time = 1;
-        // numOfPlayers
+        long time = 1;  // ??????????
+        // numOfPlayers  ---- scrollList.currentNode.total
 
         int space = 70;
 
@@ -288,9 +334,9 @@ public class UI {
         tTitle.setText("Scroll Through Arenas");
         tTitle.setBounds(200,30, 600, 60);
 
-        tCredits.setText("Credits: " + credits); //Must Because it can change
+        tCredits.setText("Credits: " + player.credits); //Must Because it can change
 
-        JLabel tPrice = new JLabel("<html>Price: " + price +"</html>");
+        JLabel tPrice = new JLabel("<html>Price: " + scrollList.currentNode.betPrice +"</html>");
         tPrice.setFont(font.deriveFont(16f)); tPrice.setForeground(Color.WHITE);
         tPrice.setBounds(200, 30 + (int) (space*1.5), 300, 30);
 
@@ -298,7 +344,7 @@ public class UI {
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
         tCounter.setBounds(200, 30+space*2, 300, 30);
 
-        char symbol = (done)? '✓': 'X';
+        char symbol = (player.checkInReady)? '✓': 'X';
         JLabel tCheckIn = new JLabel("<html>Check-in done: " + symbol +"</html>");
         tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
         tCheckIn.setBounds(200, 30+(int) (space*2.5), 300, 30);
@@ -315,7 +361,7 @@ public class UI {
         bCheckIn.setBounds(335 - smallSize[0]/2,215 + space*2,bigSize[0],bigSize[1]);
         bCheckIn.addActionListener(Check_In);
 
-        bCheckIn.setEnabled(!done);
+        bCheckIn.setEnabled(!player.checkInReady);
 
         JButton bBack = new JButton(bigB);
         bBack.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'> Back </p></html>");
@@ -326,7 +372,17 @@ public class UI {
         //bBack.setEnabled(!done);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Mouse Listener -- SCROLL
-        MouseWheelListener scroll = e -> System.out.println(e.getWheelRotation()); //-1 UP <> 1 DOWN --> Use to move around the graph
+        MouseWheelListener scroll = e -> {
+            //System.out.println(e.getWheelRotation()); //-1 UP <> 1 DOWN --> Use to move around the graph
+            if (e.getWheelRotation() == 1)
+                scrollList.next();
+            else
+                scrollList.back();
+
+            System.out.println(scrollList.currentNode.id);
+        };
+
+
 
 
         // / / / / / / / / / / / / / / / / / / / / / / / Start Fight -- Time == 0 -- Time = FIGHTTIME - CURRENTTIME
@@ -350,7 +406,6 @@ public class UI {
         cleanFrame(); //Cancel button
 
         //Data
-
         int space = 70;
 
         //Text
@@ -391,9 +446,10 @@ public class UI {
         ActionListener Back = e -> scrollScreen();
 
         ActionListener CheckIn = e -> {
-            done = true;
+            player.checkInReady = true;
             System.out.println(energySlider.getValue());
-            System.out.println(amountBox.getSelectedIndex() + 1); //
+            System.out.println(amountBox.getSelectedIndex() + 1);
+            // player.credits - price                   ////////////////////////////////
             scrollScreen();
         };
 
@@ -428,6 +484,17 @@ public class UI {
     public void fightResultsScreen(){ //7
         cleanFrame();
 
+        graph.nodeList.cleanNodes();    // Resets arenas and scroll list
+        player.arena = null;
+
+        player.ticket = new Ticket(ticketDate); // New Ticket
+        if (ticketDate == 7)
+            ticketDate = 1;
+        else
+            ticketDate += 1;
+
+        // player + winnings
+        // Jump a nicknameScreen
 
         refreshFrame(endgamebg);
     }
