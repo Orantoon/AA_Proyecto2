@@ -45,10 +45,10 @@ public class UI {
     private final JLabel tCredits = new JLabel();
 
     //Variables
-    private Player player;
+    private Player player = null;
     private Graph graph;
-    private ScrollList scrollList;
-    private int ticketDate;
+    private ScrollList scrollList = null;
+    private int ticketDate = 1;
 
     private final int WindowSize = 768;
 
@@ -109,11 +109,7 @@ public class UI {
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener EXIT = e -> System.exit(0);
         ActionListener Register = e -> {
-            try {
-                registerScreen();
-            } catch (ParseException parseException) {
-                parseException.printStackTrace();
-            }
+            registerScreen();
         };
         ActionListener LogIn = e -> logInScreen();
 
@@ -171,22 +167,7 @@ public class UI {
             //getNick.setText("Incorrect Username, Try Again...");
             //else
 
-            player.ticket = new Ticket(ticketDate); // New Ticket
-            if (ticketDate == 7)
-                ticketDate = 1;
-            else
-                ticketDate += 1;
-
-
-            try {
-                graph.playerToNode(player);
-            } catch (ParseException parseException) {
-                parseException.printStackTrace();
-            }
-
-            scrollList = new ScrollList(player.arena, graph.nodeList);
-
-            scrollScreen();
+            registerScreen();
         };
 
         //Buttons
@@ -211,11 +192,14 @@ public class UI {
         refreshFrame(loginbg);
     }
 
-    public void registerScreen() throws ParseException { //2
+    public void registerScreen() { //2
         cleanFrame();
 
         //Data
-        player = new Player();
+        if (player == null){
+            player = new Player();
+            // new random nickname
+        }
 
         //Text
         tTitle.setText("REGISTER");
@@ -242,22 +226,42 @@ public class UI {
                 return;
             }
 
+            //player.readIns();   // Player Inscription (Fight Size & Bet Price)
+
+
+            int count = 0;
+            while (!graph.nodeList.isDate(ticketDate)){
+                if (count > 7)  // No Arenas Available at all
+                    return;
+
+                if (ticketDate == 7)
+                    ticketDate = 1;
+                else
+                    ticketDate += 1;
+                count += 1;
+            }
             player.ticket = new Ticket(ticketDate); // New Ticket
             if (ticketDate == 7)
                 ticketDate = 1;
             else
                 ticketDate += 1;
 
+            //player.ticket.print();
+
 
             try {
-                graph.playerToNode(player);
+                graph.playerToNode(player);     // Player in Arena
             } catch (ParseException parseException) {
                 parseException.printStackTrace();
             }
 
-            scrollList = new ScrollList(player.arena, graph.nodeList);
+            if (player.arena == null){
+                // Message -> No Arena for that date    (optional)
+                return;
+            }
 
-            //player.nickname = "John"; String ticket = "0001A";
+            scrollList = new ScrollList(player.arena, graph.nodeList);  // New Scroll List
+
             nicknameScreen();
 
         };
@@ -326,8 +330,6 @@ public class UI {
 
         //Data
         long time = 1;  // ??????????
-        // numOfPlayers  ---- scrollList.currentNode.total
-
         int space = 70;
 
         //Text
@@ -344,10 +346,18 @@ public class UI {
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
         tCounter.setBounds(200, 30+space*2, 300, 30);
 
+        JLabel tTotal = new JLabel("<html>Total Players: " + scrollList.currentNode.total +"</html>");
+        tTotal.setFont(font.deriveFont(16f)); tTotal.setForeground(Color.WHITE);
+        tTotal.setBounds(200, 30+(int) (space*2.5), 300, 30);
+
+        JLabel tReady = new JLabel("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
+        tReady.setFont(font.deriveFont(16f)); tReady.setForeground(Color.WHITE);
+        tReady.setBounds(200, 30+space*3, 300, 30);
+
         char symbol = (player.checkInReady)? '✓': 'X';
         JLabel tCheckIn = new JLabel("<html>Check-in done: " + symbol +"</html>");
         tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
-        tCheckIn.setBounds(200, 30+(int) (space*2.5), 300, 30);
+        tCheckIn.setBounds(200, 30+(int) (space*3.5), 300, 30);
 
 
 
@@ -361,7 +371,7 @@ public class UI {
         bCheckIn.setBounds(335 - smallSize[0]/2,215 + space*2,bigSize[0],bigSize[1]);
         bCheckIn.addActionListener(Check_In);
 
-        bCheckIn.setEnabled(!player.checkInReady);
+        bCheckIn.setEnabled(!player.checkInReady && scrollList.currentNode.playerList.contains(player));
 
         JButton bBack = new JButton(bigB);
         bBack.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'> Back </p></html>");
@@ -369,7 +379,7 @@ public class UI {
         bBack.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
         bBack.addActionListener(Start);
 
-        //bBack.setEnabled(!done);
+        bBack.setEnabled(!player.checkInReady);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Mouse Listener -- SCROLL
         MouseWheelListener scroll = e -> {
@@ -379,12 +389,10 @@ public class UI {
             else
                 scrollList.back();
 
-            //System.out.println(scrollList.currentNode.id);
+            System.out.println(scrollList.currentNode.id);
+
             updateScroll();
         };
-
-
-
 
         // / / / / / / / / / / / / / / / / / / / / / / / Start Fight -- Time == 0 -- Time = FIGHTTIME - CURRENTTIME
 
@@ -395,6 +403,8 @@ public class UI {
         panel.add(tCredits);
         panel.add(tPrice);
         panel.add(tCounter);
+        panel.add(tTotal);
+        panel.add(tReady);
         panel.add(tCheckIn);
         panel.addMouseWheelListener(scroll);
         panel.add(bCheckIn);
@@ -408,8 +418,6 @@ public class UI {
 
         //Data
         long time = 1;  // ??????????
-        // numOfPlayers  ---- scrollList.currentNode.total
-
         int space = 70;
 
         //Text
@@ -426,12 +434,18 @@ public class UI {
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
         tCounter.setBounds(200, 30+space*2, 300, 30);
 
+        JLabel tTotal = new JLabel("<html>Total Players: " + scrollList.currentNode.total +"</html>");
+        tTotal.setFont(font.deriveFont(16f)); tTotal.setForeground(Color.WHITE);
+        tTotal.setBounds(200, 30+(int) (space*2.5), 300, 30);
+
+        JLabel tReady = new JLabel("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
+        tReady.setFont(font.deriveFont(16f)); tReady.setForeground(Color.WHITE);
+        tReady.setBounds(200, 30+space*3, 300, 30);
+
         char symbol = (player.checkInReady)? '✓': 'X';
         JLabel tCheckIn = new JLabel("<html>Check-in done: " + symbol +"</html>");
         tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
-        tCheckIn.setBounds(200, 30+(int) (space*2.5), 300, 30);
-
-
+        tCheckIn.setBounds(200, 30+(int) (space*3.5), 300, 30);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Check_In = e -> checkInScreen();
@@ -443,7 +457,7 @@ public class UI {
         bCheckIn.setBounds(335 - smallSize[0]/2,215 + space*2,bigSize[0],bigSize[1]);
         bCheckIn.addActionListener(Check_In);
 
-        bCheckIn.setEnabled(!player.checkInReady);
+        bCheckIn.setEnabled(!player.checkInReady && scrollList.currentNode.playerList.contains(player));
 
         JButton bBack = new JButton(bigB);
         bBack.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'> Back </p></html>");
@@ -451,10 +465,7 @@ public class UI {
         bBack.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
         bBack.addActionListener(Start);
 
-        //bBack.setEnabled(!done);
-
-
-
+        bBack.setEnabled(!player.checkInReady);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Start Fight -- Time == 0 -- Time = FIGHTTIME - CURRENTTIME
 
@@ -465,6 +476,8 @@ public class UI {
         panel.add(tCredits);
         panel.add(tPrice);
         panel.add(tCounter);
+        panel.add(tTotal);
+        panel.add(tReady);
         panel.add(tCheckIn);
         panel.add(bCheckIn);
         panel.add(bBack);
@@ -472,6 +485,7 @@ public class UI {
         refreshFrame(scrollbg);
     }
 
+    //>>>>>>> Stashed changes
     public void checkInScreen(){ //5
         cleanFrame(); //Cancel button
 
@@ -516,10 +530,34 @@ public class UI {
         ActionListener Back = e -> scrollScreen();
 
         ActionListener CheckIn = e -> {
+            int bet = 0;
+            switch (amountBox.getSelectedIndex() + 1){
+                case 1:
+                    bet = 10;
+                    break;
+                case 2:
+                    bet = 25;
+                    break;
+                case 3:
+                    bet = 50;
+                    break;
+                case 4:
+                    bet = 100;
+                    break;
+                case 5:
+                    bet = 500;
+                    break;
+                case 6:
+                    bet = 1000;
+            }
+
+            if (bet < scrollList.currentNode.betPrice || bet > player.credits)
+                return;
+
+            //System.out.println(energySlider.getValue());
+            //System.out.println(amountBox.getSelectedIndex() + 1);
             player.checkInReady = true;
-            System.out.println(energySlider.getValue());
-            System.out.println(amountBox.getSelectedIndex() + 1);
-            // player.credits - price                   ////////////////////////////////
+            player.credits -= bet;
             scrollScreen();
         };
 
@@ -555,21 +593,15 @@ public class UI {
         cleanFrame();
 
         graph.nodeList.cleanNodes();    // Resets arenas and scroll list
-        player.arena = null;
-
-        player.ticket = new Ticket(ticketDate); // New Ticket
-        if (ticketDate == 7)
-            ticketDate = 1;
-        else
-            ticketDate += 1;
+        scrollList = null;
+        player.clean();
 
         // player + winnings
-        // Jump a nicknameScreen
 
         refreshFrame(endgamebg);
     }
 
-    ActionListener Start = e -> startScreen(); //Goes to the start
+    ActionListener Start = e -> registerScreen(); //Goes to the start (Register Screen)
 
 
     public static void main(String[] args) throws IOException, FontFormatException {

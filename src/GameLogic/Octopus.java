@@ -7,7 +7,7 @@ public class Octopus {
     private final int[] attributes; //Life, attack, speed/turns
     private int[] position;
     private long time;
-
+    //private userid, nickname, USUARIO EN SI
 
     public Octopus(int energy, int id){ //energy from 20 to 100 //ids must start from 1 to X
         this.id = id;
