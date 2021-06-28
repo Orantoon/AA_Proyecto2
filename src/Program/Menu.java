@@ -7,9 +7,11 @@ import Players.Player;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
 import Players.Ticket;
+import Utils.Clock;
 import Utils.FileRead;
 
 import java.text.ParseException;
@@ -34,11 +36,14 @@ public class Menu {
             player.ticket = new Ticket(3);
             player.inscription = "quiero jugar en peleas de 15 pulpos y apostar más de $20.00 hasta un máximo de $100.00";
             //player.ticket.print();
-            graph.playerToNode(player);
+            //graph.playerToNode(player);
 
-            player.readIns();
-            player.randNickname();
-            player.print();
+            //player.readIns();
+            //player.randNickname();
+            //player.print();
+
+            //Clock clock = new Clock();
+            //System.out.println(Arrays.toString(clock.timeLeft(player.ticket.date, player.ticket.time)));
 
             //ScrollList scrollList = new ScrollList(player.arena, nodeList);
             //scrollList.print();
