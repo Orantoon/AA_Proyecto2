@@ -32,7 +32,7 @@ public class Ticket {
     }
 
     public String weekDate() throws ParseException {
-        String sdate = date[0]+"/"+(date[1]+1)+"/"+date[2];
+        String sdate = date[1]+"/"+(date[1])+"/"+date[2];
         Date ndate = new SimpleDateFormat("dd/M/yyyy").parse(sdate);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(ndate);

@@ -4,6 +4,7 @@ import Graphs.Graph;
 import Graphs.ScrollList;
 import Players.Player;
 import Players.Ticket;
+import Utils.Clock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -258,6 +259,9 @@ public class UI {
 
             //player.ticket.print();
 
+            player.ticket.date = new int[]{28,6,2021};
+            player.ticket.time = new int[]{4,23,0};
+
             // New Nickname ==========
             if (player.nickname == null) {
                 try {
@@ -349,8 +353,8 @@ public class UI {
         cleanFrame();
 
         //Data
-        long time = 1;  // ??????????
         int space = 70;
+        Clock clock = new Clock();
 
         //Text
         tTitle.setText("Scroll Through Arenas");
@@ -362,7 +366,7 @@ public class UI {
         tPrice.setFont(font.deriveFont(16f)); tPrice.setForeground(Color.WHITE);
         tPrice.setBounds(200, 30 + (int) (space*1.5), 300, 30);
 
-        JLabel tCounter = new JLabel("<html>Time Remaining: " + time +"</html>");
+        JLabel tCounter = new JLabel("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
         tCounter.setBounds(200, 30+space*2, 300, 30);
 
@@ -378,7 +382,6 @@ public class UI {
         JLabel tCheckIn = new JLabel("<html>Check-in done: " + symbol +"</html>");
         tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
         tCheckIn.setBounds(200, 30+(int) (space*3.5), 300, 30);
-
 
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
@@ -437,8 +440,8 @@ public class UI {
         cleanFrame();
 
         //Data
-        long time = 1;  // ??????????
         int space = 70;
+        Clock clock = new Clock();
 
         //Text
         tTitle.setText("Scroll Through Arenas");
@@ -450,7 +453,7 @@ public class UI {
         tPrice.setFont(font.deriveFont(16f)); tPrice.setForeground(Color.WHITE);
         tPrice.setBounds(200, 30 + (int) (space*1.5), 300, 30);
 
-        JLabel tCounter = new JLabel("<html>Time Remaining: " + time +"</html>");
+        JLabel tCounter = new JLabel("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
         tCounter.setBounds(200, 30+space*2, 300, 30);
 
