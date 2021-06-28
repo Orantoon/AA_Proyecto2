@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.management.PlatformLoggingMXBean;
 import java.text.ParseException;
+import java.lang.Math;
 
 public class UI {
     //Frame and panels
@@ -199,6 +200,8 @@ public class UI {
     public void registerScreen() { //2
         cleanFrame();
 
+        int space = 70;
+
         //Data
         if (player == null){
             player = new Player();
@@ -209,10 +212,16 @@ public class UI {
         tTitle.setText("REGISTER");
         tTitle.setBounds(315,30, 400, 40);
 
+        //Paragraph specifications
+        tNormal.setText("<html><center>*Al describir la cantidad de jugadores contra los cuales le<br>gustaria jugar, " +
+                "por favor indiquelo despues de ingresar el<br>numero, igualmente con la cantidad de creditos/dolares" +
+                "<br>que le gustaria apostar." +
+                "<br><br>Por ejemplo:<br>Me gustaria jugar contra 7 pulpos y apostar 20 dolares." +
+                "</center></html>");
+        tNormal.setBounds(50, 20+space*3, 900, 500);
+
         tCredits.setText("Credits: " + player.credits);
         tCredits.setBounds(600, 15, 300, 30);
-
-        int space = 70;
 
         //Text Area
         JTextArea textArea = new JTextArea("Write your description here...");
@@ -306,9 +315,11 @@ public class UI {
         //Panel
         panel.add(tTitle);
         panel.add(tCredits);
+        panel.add(tNormal);
         panel.add(textArea);
         panel.add(getText);
         panel.add(bBack);
+
 
         refreshFrame(regbg);
     }
@@ -323,7 +334,10 @@ public class UI {
         tTitle.setBounds(200,60, 600, 60);
 
         tNick.setText("<html>Nickname: " + player.nickname + "</html>");
-        tNick.setBounds(20, 15, 300, 30);
+        tNick.setBounds(20, 15, 600, 30);
+
+        // FOR GETTING TICKET IN 5 MINUTES
+        //player.ticket.time = new int[]{15, 58, 30}; ///////////////////////////////////////////////////////////////////// function to generate
 
         tNormal.setText("<html>Fight Date: " + player.ticket.getDate() + "</html>");
         tNormal.setBounds(200, 30+(int)(space*2.5), 310, 30);
@@ -368,7 +382,7 @@ public class UI {
 
         JLabel tCounter = new JLabel("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
-        tCounter.setBounds(200, 30+space*2, 300, 30);
+        tCounter.setBounds(200, 30+space*2, 600, 30);
 
         JLabel tTotal = new JLabel("<html>Total Players: " + scrollList.currentNode.total +"</html>");
         tTotal.setFont(font.deriveFont(16f)); tTotal.setForeground(Color.WHITE);
@@ -386,6 +400,21 @@ public class UI {
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Check_In = e -> checkInScreen();
+        ActionListener UpdateTime = e -> {
+            if (scrollList.currentNode.playerList.contains(player))
+                tCounter.setText("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
+            else
+                tCounter.setText("Time Remaining: NOT YOUR ARENA");
+
+            frame.revalidate();
+            frame.repaint();
+
+        };
+
+        // / / / / / / / / / / / / / / / / / / / / / / / Timer
+        Timer t = new Timer(1000, UpdateTime);
+        t.start();
+
 
         //Buttons
         JButton bCheckIn = new JButton(bigB);
@@ -413,8 +442,8 @@ public class UI {
                 scrollList.back();
 
             //System.out.println(scrollList.currentNode.id);
+            refreshScrolls(tPrice, tTotal, tReady, symbol, tCheckIn, bCheckIn, bBack);
 
-            updateScroll();
         };
 
 
@@ -434,76 +463,21 @@ public class UI {
         refreshFrame(scrollbg);
     }
 
-    public void updateScroll(){
-        cleanFrame();
-
-        //Data
-        int space = 70;
-        Clock clock = new Clock();
-
-        //Text
-        tTitle.setText("Scroll Through Arenas");
-        tTitle.setBounds(200,30, 600, 60);
-
-        tCredits.setText("Credits: " + player.credits); //Must Because it can change
-
-        JLabel tPrice = new JLabel("<html>Price: " + scrollList.currentNode.betPrice +"</html>");
-        tPrice.setFont(font.deriveFont(16f)); tPrice.setForeground(Color.WHITE);
-        tPrice.setBounds(200, 30 + (int) (space*1.5), 300, 30);
-
-        JLabel tCounter = new JLabel("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
-        tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
-        tCounter.setBounds(200, 30+space*2, 300, 30);
-
-        JLabel tTotal = new JLabel("<html>Total Players: " + scrollList.currentNode.total +"</html>");
-        tTotal.setFont(font.deriveFont(16f)); tTotal.setForeground(Color.WHITE);
-        tTotal.setBounds(200, 30+(int) (space*2.5), 300, 30);
-
-        JLabel tReady = new JLabel("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
-        tReady.setFont(font.deriveFont(16f)); tReady.setForeground(Color.WHITE);
-        tReady.setBounds(200, 30+space*3, 300, 30);
-
-        char symbol = (player.checkInReady)? '✓': 'X';
-        JLabel tCheckIn = new JLabel("<html>Check-in done: " + symbol +"</html>");
-        tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
-        tCheckIn.setBounds(200, 30+(int) (space*3.5), 300, 30);
-
-        // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
-        ActionListener Check_In = e -> checkInScreen();
-
-        //Buttons
-        JButton bCheckIn = new JButton(bigB);
-        bCheckIn.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'>Check In</p></html>");
-        bCheckIn.setHorizontalTextPosition(SwingConstants.CENTER);
-        bCheckIn.setBounds(335 - smallSize[0]/2,215 + space*2,bigSize[0],bigSize[1]);
-        bCheckIn.addActionListener(Check_In);
+    public void refreshScrolls(JLabel  tPrice, JLabel tTotal, JLabel tReady, char symbol, JLabel tCheckIn, JButton bCheckIn, JButton bBack){
+        tPrice.setText("<html>Price: " + scrollList.currentNode.betPrice +"</html>");
+        tTotal.setText("<html>Total Players: " + scrollList.currentNode.total +"</html>");
+        tReady.setText("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
+        symbol = (player.checkInReady)? '✓': 'X';
+        tCheckIn.setText("<html>Check-in done: " + symbol +"</html>");
 
         bCheckIn.setEnabled(!player.checkInReady && scrollList.currentNode.playerList.contains(player));
-
-        JButton bBack = new JButton(bigB);
-        bBack.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'> Back </p></html>");
-        bBack.setHorizontalTextPosition(SwingConstants.CENTER);
-        bBack.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
-        bBack.addActionListener(Start);
-
         bBack.setEnabled(!player.checkInReady);
 
-
-        //Panel
-        panel.add(tTitle);
-        panel.add(tNick);
-        panel.add(tCredits);
-        panel.add(tPrice);
-        panel.add(tCounter);
-        panel.add(tTotal);
-        panel.add(tReady);
-        panel.add(tCheckIn);
-        panel.add(bCheckIn);
-        panel.add(bBack);
-
-        refreshFrame(scrollbg);
+        frame.revalidate();
+        frame.repaint();
     }
 
+    
     public void checkInScreen(){ //5
         cleanFrame(); //Cancel button
 

@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FileRead {
-    private String path = "/Users/david/Desktop/Tareas David/TEC/Semestre 3/Análisis de Algoritmos/Proyectos/Proyecto 2/AA_Proyecto2/";
+    // private String path = "/Users/david/Desktop/Tareas David/TEC/Semestre 3/Análisis de Algoritmos/Proyectos/Proyecto 2/AA_Proyecto2/"; //Full Path Dave
+    private final String path = "";
 
     public FileRead(){}
 
