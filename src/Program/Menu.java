@@ -5,14 +5,18 @@ import Graphs.NodeList;
 import Graphs.ScrollList;
 import Players.Player;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Scanner;
 import Players.Ticket;
+import Utils.FileRead;
+
 import java.text.ParseException;
 
 public class Menu {
 
-    public Menu() throws ParseException {
+    public Menu() throws ParseException, FileNotFoundException {
         NodeList nodeList = new NodeList();
         Graph graph = new Graph();
 
@@ -27,13 +31,13 @@ public class Menu {
 
         if (opt == 1) {
             Player player = new Player();
-            player.nickname = "Joe";
             player.ticket = new Ticket(3);
             player.inscription = "quiero jugar en peleas de 15 pulpos y apostar más de $20.00 hasta un máximo de $100.00";
             //player.ticket.print();
             graph.playerToNode(player);
 
             player.readIns();
+            player.randNickname();
             player.print();
 
             //ScrollList scrollList = new ScrollList(player.arena, nodeList);
@@ -59,7 +63,7 @@ public class Menu {
         System.out.println("Thanks for playing!");
     }
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
         new Menu();
     }
 }

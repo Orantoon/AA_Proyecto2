@@ -20,13 +20,14 @@ public class Ticket {
     public void newDate(int weekDate){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 1);
+
         while (calendar.get(Calendar.DAY_OF_WEEK) != 1){    // First day of next week
             calendar.add(Calendar.DATE, 1);
         }
         calendar.add(Calendar.DATE, weekDate - 1);  // Date of next week
 
         date[0] = calendar.get(Calendar.DATE);
-        date[1] = calendar.get(Calendar.MONTH);
+        date[1] = calendar.get(Calendar.MONTH) + 1;
         date[2] = calendar.get(Calendar.YEAR);
     }
 
@@ -48,6 +49,10 @@ public class Ticket {
             default -> "ERROR";
         };
 
+    }
+
+    public String getDate(){
+        return date[0] + "/" + date[1] + "/" + date[2] + " " + time[0] + ":" + time[1] + ":" + time[2];
     }
 
     public void print(){
