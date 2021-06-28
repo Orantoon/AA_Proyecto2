@@ -29,8 +29,8 @@ public class Player {
         ticket = null;
 
         timeZone = getTimeZone();
-        fightSize = 0;
-        betPrice = 0;
+        fightSize = -1;
+        betPrice = -1;
         matchesPlayed = 0;
 
         arena = null;
@@ -86,7 +86,105 @@ public class Player {
         return 1000;
     }
 
+    public void readIns(){
+        inscription = inscription.toLowerCase();  // Everything to Lower Case
+        inscription = inscription.replaceAll("\\$","");   // No $ Symbol
+        inscription += " "; // Extra space at the end to read the last word
+
+        // No Accent Marks
+        inscription = inscription.replaceAll("á","a");
+        inscription = inscription.replaceAll("é","e");
+        inscription = inscription.replaceAll("í","i");
+        inscription = inscription.replaceAll("ó","o");
+        inscription = inscription.replaceAll("ú","u");
+
+
+        int fIndex = inscription.indexOf(' ');
+        String str;
+
+        float num1 = 0;
+        float num2 = 0;
+        boolean n1Red = false;
+        boolean n2Red = false;
+        boolean bpRed = false;
+        boolean fsRed = false;
+
+        while (fIndex != -1){   // No more spaces
+            str = inscription.substring(0,fIndex);  // Gets the string until the next space (index)
+
+            try {   // Number
+                if (!n1Red){
+                    num1 = Float.parseFloat(str);
+                    n1Red = true;
+                }else{
+                    num2 = Float.parseFloat(str);
+                    n2Red = true;
+                }
+            }catch (Exception e){   // Word
+                if (!bpRed && checkKeyword(str) == 1){    // Bet Price
+                    if (!n2Red){
+                        betPrice = num1;
+                    }else{
+                        betPrice = betRange(num1, num2);
+                    }
+                    num1 = 0;
+                    num2 = 0;
+                    n1Red = false;
+                    n2Red = false;
+                    bpRed = true;
+                }else if (!fsRed && checkKeyword(str) == 2){  // Fight Size
+                    if (!n2Red){
+                        fightSize = (int) num1;
+                    }else{
+                        fightSize = (int) (num1 + num2);
+                    }
+                    num1 = 0;
+                    num2 = 0;
+                    n1Red = false;
+                    n2Red = false;
+                    fsRed = true;
+                }
+            }
+
+            inscription = inscription.substring(fIndex+1);  // Deletes the string processed
+            fIndex = inscription.indexOf(' ');  // Looks for the next index
+
+            if (!bpRed && inscription.indexOf(' ') == -1){    // If there are still numbers left and no keyword, those will be part of betPrice
+                if (!n2Red){
+                    betPrice = num1;
+                }else{
+                    betPrice = betRange(num1, num2);
+                }
+            }
+        }
+
+    }
+
+    /*
+    0 = No Important Word
+    1 = Bet Price
+    2 = Fight Size
+     */
+    public int checkKeyword(String keyword){
+        switch (keyword){
+            // Bet Price
+            case "dolar": return 1;
+            case "dolares": return 1;
+            case "credito": return 1;
+            case "creditos": return 1;
+
+            // Fight Size
+            case "pulpo": return 2;
+            case "pulpos": return 2;
+            case "jugadores": return 2;
+            case "jugador": return 2;
+        }
+
+        return 0;
+    }
+
     public float betRange(float num1, float num2){
+        RandomNum randomNum = new RandomNum();
         float n1;
         float n2;
         if (num1 > num2){
@@ -96,146 +194,20 @@ public class Player {
             n2 = num1;
             n1 = num2;
         }
-        if (n1 < 10)
+        int value = randomNum.getRandom((int)(n1-n2));
+        value += n2;
+
+        if (value <= 10)
             return 10;
-        if (n1 >= 10 && 10 >= n2)
-            return 10;
-        if (n1 >= 25 && 25 >= n2)
+        if (value <= 25)
             return 25;
-        if (n1 >= 50 && 50 >= n2)
+        if (value <= 50)
             return 50;
-        if (n1 >= 100 && 100 >= n2)
+        if (value <= 100)
             return 100;
-        if (n1 >= 500 && 500 >= n2)
+        if (value <= 500)
             return 500;
-        if (n1 >= 1000 && 1000 >= n2)
-            return 1000;
-        if (n2 > 1000)
-            return 1000;
-
-        System.out.println("?????");
-        return 50;
-    }
-
-    public void readIns(){
-        String keyword = "";
-        String num1 = "";
-        String num2 = "";
-        //String max = "";
-        //String min = "";
-
-        int fs = 0;  // Fight Size
-        float bp = 0;  // Bet Price
-        char current;
-        int code = 0;
-        boolean dubs = false;
-
-        for (int i = 0; i < inscription.length(); i++){
-            current = inscription.charAt(i);
-
-            // Number
-            if (Character.isDigit(current)){    // If Digit, Saved
-                num1 += current;
-                continue;
-            }
-            if (current == '.' && Character.isDigit((inscription.charAt(i+1)))){    // If Dot and next is Digit, Saved
-                dubs = true;
-                num1 += current;
-                continue;
-            }
-
-            if (dubs)
-                code = 1;
-            // Word
-            switch (code){
-                case 1: // Float.parseFloat(num1) + Float.parseFloat(num2)
-                    dubs = false;
-                    if (num1.equals(""))
-                        break;
-                    if (!num2.equals("")){
-                        bp = betRange(Float.parseFloat(num1), Float.parseFloat(num2));
-                        break;
-                    }
-                    if (bp != 0){
-                        bp = betRange(Float.parseFloat(num1), bp);
-                        dubs = true;
-                        break;
-                    }
-
-                    bp =  Float.parseFloat(num1);
-                    num1 = "";
-                    num2 = "";
-                    code = 0;
-                    break;
-                case 2:
-
-                case 3:
-
-                case 4:
-                    if (num1.equals("") || fs != 0)
-                        break;
-                    if (!num2.equals("")){
-                        fs = Integer.parseInt(num1) + Integer.parseInt(num2);
-                        num1 = "";
-                        num2 = "";
-                        code = 0;
-                        break;
-                    }
-                    fs = Integer.parseInt(num1);
-                    num1 = "";
-                    num2 = "";
-                    code = 0;
-            }
-
-            if (current == ' '){
-                code = checkKeyword(keyword);
-                keyword = "";
-                continue;
-            }
-            keyword += current;
-        }
-
-    }
-
-    /*
-    0 = No Important Word
-    1 = Bet Price
-    2 = Bet Price MIN
-    3 = Bet Price MAX
-    4 = Fight Size
-     */
-    public int checkKeyword(String keyword){
-        keyword = keyword.toLowerCase();  // Everything to Lower Case
-        keyword = keyword.replaceAll("\\s","");   // No Spaces
-        // No Accent Marks
-        keyword = keyword.replaceAll("á","a");
-        keyword = keyword.replaceAll("é","e");
-        keyword = keyword.replaceAll("í","i");
-        keyword = keyword.replaceAll("ó","o");
-        keyword = keyword.replaceAll("ú","u");
-
-        switch (keyword){
-            // Bet Price
-            //case "$": return 1;
-            case "dolar": return 1;
-            case "dolares": return 1;
-            case "credito": return 1;
-            case "creditos": return 1;
-
-            // Bet Price MIN
-            //case "minimo": return 2;
-
-            // Bet Price MAX
-            //case "maximo": return 3;
-
-            // Fight Size
-            case "pulpo": return 4;
-            case "pulpos": return 4;
-            //case "pelea": return 4;
-            //case "peleas": return 4;
-        }
-
-        return 0;
+        return 1000;
     }
 
     public void clean(){

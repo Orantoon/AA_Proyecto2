@@ -226,8 +226,11 @@ public class UI {
                 return;
             }
 
-            //player.readIns();   // Player Inscription (Fight Size & Bet Price)
-
+            player.readIns();   // Player Inscription (Fight Size & Bet Price)
+            if (player.fightSize == -1 || player.betPrice == -1){
+                textArea.setText("Please write clearly what you want...");
+                return;
+            }
 
             int count = 0;
             while (!graph.nodeList.isDate(ticketDate)){
@@ -389,7 +392,7 @@ public class UI {
             else
                 scrollList.back();
 
-            System.out.println(scrollList.currentNode.id);
+            //System.out.println(scrollList.currentNode.id);
 
             updateScroll();
         };

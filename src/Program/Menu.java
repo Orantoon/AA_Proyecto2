@@ -29,10 +29,12 @@ public class Menu {
             Player player = new Player();
             player.nickname = "Joe";
             player.ticket = new Ticket(3);
+            player.inscription = "quiero jugar en peleas de 15 pulpos y apostar más de $20.00 hasta un máximo de $100.00";
             //player.ticket.print();
-            player.fightSize = 3;
-            player.betPrice = 1000;
             graph.playerToNode(player);
+
+            player.readIns();
+            player.print();
 
             //ScrollList scrollList = new ScrollList(player.arena, nodeList);
             //scrollList.print();
