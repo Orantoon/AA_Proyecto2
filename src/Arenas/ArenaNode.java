@@ -49,6 +49,15 @@ public class ArenaNode {
         next = null;
     }
 
+    public int getReady(){
+        int res = 0;
+        for (int i = 0; i < playerList.size(); i++){
+            if (playerList.get(i).checkInReady)
+                res += 1;
+        }
+        return res;
+    }
+
     public void clean(){
         playerList = new Vector<Player>();
 
@@ -59,6 +68,19 @@ public class ArenaNode {
 
         back = null;
         next = null;
+    }
+
+    public String weekDate(int num){
+        return switch (num) {
+            case 1 -> "Domingo";
+            case 2 -> "Lunes";
+            case 3 -> "Martes";
+            case 4 -> "Miercoles";
+            case 5 -> "Jueves";
+            case 6 -> "Viernes";
+            case 7 -> "Sabado";
+            default -> "ERROR";
+        };
     }
 
     public void print(){

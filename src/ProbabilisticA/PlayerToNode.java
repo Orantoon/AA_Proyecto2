@@ -15,6 +15,8 @@ public class PlayerToNode {
 
     public void mainProcess(Player player) throws ParseException {
         cleanArenas();
+        cleanPlayer(player);
+
         RandomNum random = new RandomNum();
         int total = sumAllNodes(player);
         int value = random.getRandom(100);
@@ -67,19 +69,35 @@ public class PlayerToNode {
 
     public int compPlayerNode(ArenaNode arena, Player player) throws ParseException {
         int res = 0;
-        if (arena.ticketDay.equals(player.ticket.weekDate()))
-            res += 7;
+        if (!arena.ticketDay.equals(player.ticket.weekDate()))   // Same date is the most important data
+            return 0;
         if (arena.timeZone.equals(player.timeZone))
             res += 3;
-        if (arena.fightSize == player.fightSize)
-            res += 6;
-        if (arena.betPrice == player.betPrice)
+        if (arena.fightSize == player.limitFightSize())
+            res += 9;
+        if (arena.betPrice == player.limitBetPrice())
             res += 6;
         if (arena.experience.equals(player.getExperience()))
             res += 4;
-        if (res - arena.total < 0)
+
+        if (res == 0)   // A minimum value
+            return 1;
+
+        if (res - arena.total < 0 || arena.total >= 10) // Max space = 10 players per arena
             return 0;
         return res - arena.total;
+    }
+
+    public void cleanPlayer(Player player){
+        ArenaNode tmp = nodeList.firstNode;
+        while(tmp != null){
+            if (tmp.playerList.contains(player)){
+                player.arena = null;
+                tmp.playerList.remove(player);
+                return;
+            }
+            tmp = tmp.nextN;
+        }
     }
 
     public void cleanArenas(){  // Leaves all arenas in 0 percentage

@@ -12,23 +12,23 @@ public class NodeList {   // All Nodes
     public void initialize(){
         firstNode = new ArenaNode(1, "Lunes", "EST", 10, 10, "Principiante");
         ArenaNode tmp = firstNode;
-        tmp.nextN = new ArenaNode(2, "Jueves", "EST", 2, 50, "Avanzado");
+        tmp.nextN = new ArenaNode(2, "Jueves", "EST", 9, 50, "Avanzado");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(3, "Lunes", "AST", 4, 1000, "Brutal");
+        tmp.nextN = new ArenaNode(3, "Lunes", "AST", 8, 1000, "Brutal");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(4, "Sabado", "CST", 15, 100, "Medio");
+        tmp.nextN = new ArenaNode(4, "Sabado", "CST", 7, 100, "Medio");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(5, "Martes", "CST", 2, 25, "Principiante");
+        tmp.nextN = new ArenaNode(5, "Martes", "CST", 6, 25, "Principiante");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(6, "Domingo", "AST", 10, 50, "Brutal");
+        tmp.nextN = new ArenaNode(6, "Domingo", "AST", 5, 50, "Brutal");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(7, "Viernes", "EST", 3, 1000, "Medio");
+        tmp.nextN = new ArenaNode(7, "Viernes", "EST", 4, 1000, "Medio");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(8, "Miercoles", "CST", 5, 500, "Principiante");
+        tmp.nextN = new ArenaNode(8, "Miercoles", "CST", 3, 500, "Principiante");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(9, "Lunes", "EST", 5, 100, "Avanzado");
+        tmp.nextN = new ArenaNode(9, "Lunes", "EST", 2, 100, "Avanzado");
         tmp = tmp.nextN;
-        tmp.nextN = new ArenaNode(10, "Domingo", "AST", 3, 25, "Brutal");
+        tmp.nextN = new ArenaNode(10, "Domingo", "AST", 10, 25, "Brutal");
     }
 
     public void cleanNodes(){
@@ -65,6 +65,16 @@ public class NodeList {   // All Nodes
         ArenaNode tmp = firstNode;
         while(tmp != null){
             if (tmp.id == node.id)
+                return true;
+            tmp = tmp.nextN;
+        }
+        return false;
+    }
+
+    public boolean isDate(int date){
+        ArenaNode tmp = firstNode;
+        while(tmp != null){
+            if (tmp.ticketDay.equals(tmp.weekDate(date)))
                 return true;
             tmp = tmp.nextN;
         }

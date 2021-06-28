@@ -19,7 +19,6 @@ public class Ticket {
 
     public void newDate(int weekDate){
         Calendar calendar = Calendar.getInstance();
-
         calendar.add(Calendar.DATE, 1);
         while (calendar.get(Calendar.DAY_OF_WEEK) != 1){    // First day of next week
             calendar.add(Calendar.DATE, 1);
@@ -32,7 +31,7 @@ public class Ticket {
     }
 
     public String weekDate() throws ParseException {
-        String sdate = date[0]+"/"+date[1]+"/"+date[2];
+        String sdate = date[0]+"/"+(date[1]+1)+"/"+date[2];
         Date ndate = new SimpleDateFormat("dd/M/yyyy").parse(sdate);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(ndate);
