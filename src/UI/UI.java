@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.management.PlatformLoggingMXBean;
 import java.text.ParseException;
@@ -159,6 +160,8 @@ public class UI {
         getNick.setBounds(234,120+space*2,300,30);
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
+        ActionListener Start = e -> startScreen();
+
         ActionListener Continue = e -> {
             player = new Player();
             //player = findplayer();
@@ -218,6 +221,8 @@ public class UI {
 
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
+        ActionListener Start = e -> startScreen();
+
         ActionListener Continue = e -> {
             player.inscription = textArea.getText();
 
@@ -226,12 +231,14 @@ public class UI {
                 return;
             }
 
-            player.readIns();   // Player Inscription (Fight Size & Bet Price)
+            // Player Inscription (Fight Size & Bet Price) ==========
+            player.readIns();
             if (player.fightSize == -1 || player.betPrice == -1){
                 textArea.setText("Please write clearly what you want...");
                 return;
             }
 
+            // New Ticket ==========
             int count = 0;
             while (!graph.nodeList.isDate(ticketDate)){
                 if (count > 7)  // No Arenas Available at all
@@ -243,7 +250,7 @@ public class UI {
                     ticketDate += 1;
                 count += 1;
             }
-            player.ticket = new Ticket(ticketDate); // New Ticket
+            player.ticket = new Ticket(ticketDate);
             if (ticketDate == 7)
                 ticketDate = 1;
             else
@@ -251,7 +258,17 @@ public class UI {
 
             //player.ticket.print();
 
+            // New Nickname ==========
+            if (player.nickname == null) {
+                try {
+                    player.randNickname();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            }
 
+
+            // New Arena ==========
             try {
                 graph.playerToNode(player);     // Player in Arena
             } catch (ParseException parseException) {
@@ -299,13 +316,13 @@ public class UI {
 
         //Text
         tTitle.setText("<html>Welcome to the Octopi<br><center>" + player.nickname + "!</center></html>");
-        tTitle.setBounds(200,30, 600, 60);
+        tTitle.setBounds(200,60, 600, 60);
 
         tNick.setText("<html>Nickname: " + player.nickname + "</html>");
         tNick.setBounds(20, 15, 300, 30);
 
-        tNormal.setText("<html>Next Ticket:" + player.ticket + "</html>");     // Fecha y hora
-        tNormal.setBounds(200, 30+(int)(space*1.5), 300, 30);
+        tNormal.setText("<html>Fight Date: " + player.ticket.getDate() + "</html>");
+        tNormal.setBounds(200, 30+(int)(space*2.5), 310, 30);
 
         tCredits.setText("Credits: " + player.credits); //A must if it's loading an existing user
 

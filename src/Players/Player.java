@@ -1,8 +1,10 @@
 package Players;
 
 import Arenas.ArenaNode;
+import Utils.FileRead;
 import Utils.RandomNum;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 
 public class Player {
@@ -208,6 +210,23 @@ public class Player {
         if (value <= 500)
             return 500;
         return 1000;
+    }
+
+    public void randNickname() throws FileNotFoundException {
+        FileRead fileRead = new FileRead();
+        RandomNum randomNum = new RandomNum();
+
+        // while (true){
+        int value = randomNum.getRandom(fileRead.lineCount("nicknames")-1);
+        String res = fileRead.readLine("nicknames",value);
+        res += "-";
+        value = randomNum.getRandom(fileRead.lineCount("nicknames")-1);
+        res += fileRead.readLine("nicknames",value);
+
+        // SI res NO EXISTE CONTINUE, SI ES NUEVO BREAK, VALIDAR AQUI =================
+        // }
+
+        nickname = res;
     }
 
     public void clean(){
