@@ -280,7 +280,7 @@ public class UI {
             }
 
             if (player.arena == null){
-                // Message -> No Arena for that date    (optional)
+                System.out.println("No Arena for that date");
                 return;
             }
 
@@ -417,8 +417,6 @@ public class UI {
             updateScroll();
         };
 
-        // / / / / / / / / / / / / / / / / / / / / / / / Start Fight -- Time == 0 -- Time = FIGHTTIME - CURRENTTIME
-
 
         //Panel
         panel.add(tTitle);
@@ -490,8 +488,6 @@ public class UI {
 
         bBack.setEnabled(!player.checkInReady);
 
-        // / / / / / / / / / / / / / / / / / / / / / / / Start Fight -- Time == 0 -- Time = FIGHTTIME - CURRENTTIME
-
 
         //Panel
         panel.add(tTitle);
@@ -508,7 +504,6 @@ public class UI {
         refreshFrame(scrollbg);
     }
 
-    //>>>>>>> Stashed changes
     public void checkInScreen(){ //5
         cleanFrame(); //Cancel button
 
