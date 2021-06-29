@@ -23,28 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99c8ee09-f37e-4473-947e-3eb8018dad57" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DistributionLogic/Distribute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ParallelsA/ControlUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ParallelsA/Memory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ParallelsA/ParallelA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ParallelsA/Processor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils/PlayersFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Arenas/ArenaNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Arenas/ArenaNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/GameLogic/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/GameLogic/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/GameLogic/Octopus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/GameLogic/Octopus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/PlayerList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Ticket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/UI/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/UI/UI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Utils/FileRead.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Utils/FileRead.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Arenas/ArenaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Arenas/ArenaNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic/Octopus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/Octopus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ParallelsA/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Players/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Players/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/FileRead.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/FileRead.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParallelsA/ControlUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParallelsA/ControlUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParallelsA/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParallelsA/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParallelsA/Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParallelsA/Processor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
