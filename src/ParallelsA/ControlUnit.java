@@ -1,10 +1,5 @@
 package ParallelsA;
 
-import GameLogic.Game;
-
-import java.awt.*;
-import java.io.IOException;
-
 public class ControlUnit {
     private Memory mem = new Memory();
 

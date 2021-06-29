@@ -1,15 +1,13 @@
 package UI;
 
 import GameLogic.Game;
-import GameLogic.Map;
 import GameLogic.Octopus;
-import GeneticA.GeneticAlgorithm;
 import Graphs.Graph;
 import Graphs.ScrollList;
 import Players.Player;
 import Players.Ticket;
 import Utils.Clock;
-import Utils.PlayersFile;
+import Files.PlayersFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,10 +15,8 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.management.PlatformLoggingMXBean;
 import java.text.ParseException;
 import java.util.Vector;
-import java.util.concurrent.TimeUnit;
 
 public class UI {
     //Frame and panels
@@ -601,7 +597,7 @@ public class UI {
             catch (IOException ioException) { ioException.printStackTrace(); }
 
             scrollList.currentNode.readyPlayers++;
-            scrollList.currentNode.total += bet;
+            scrollList.currentNode.totalPrice += bet;
             scrollList.currentNode.usersCharge.put(player.nickname, bet);
 
             scrollScreen();
@@ -647,7 +643,7 @@ public class UI {
         Vector<Octopus> octopuses = g.getOctopuses();
 
         //Distribute winning
-        int total = scrollList.currentNode.total, credit, numP = octopuses.size();
+        int total = scrollList.currentNode.totalPrice, credit, numP = octopuses.size();
         String nickname;
 
         JLabel[] players = new JLabel[10];

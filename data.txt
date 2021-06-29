@@ -13,4 +13,8 @@ Harold-Gunther^EST^1000.0^0
 Medir-Otoniel^EST^950.0^0
 Reinoldo-Menahem^AST^1000.0^0
 Bernardo-Menajem^CST^1000.0^0
-Alexander-Sergio^EST^1000.0^0
+Alexander-Sergio^EST^1000.0^0Miron-Bosco^AST^1000.0^0
+Matusalen-Leopoldo^EST^500.0^0
+
+Crespo-Jorge^EST^975.0^0
+

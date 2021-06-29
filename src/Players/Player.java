@@ -1,7 +1,7 @@
 package Players;
 
 import Arenas.ArenaNode;
-import Utils.FileRead;
+import Files.FileRead;
 import Utils.RandomNum;
 
 import java.io.FileNotFoundException;

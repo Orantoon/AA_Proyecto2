@@ -13,10 +13,9 @@ public class Ticket {
         //newDate(weekDate); //Lo hace realmente
 
         //Para revision ////////////////////////////////////////////////////////////////////////////////////////////////
-
         date = new int[]{29,6,2021};
-        time[0] = 3;   // 04 : 25 : 00 pm
-        time[1] = 27;
+        time[0] = 17;   // 05 : 25 : 30 pm
+        time[1] = 25;
         time[2] = 30;
 
     }

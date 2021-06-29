@@ -17,8 +17,8 @@ public class ArenaNode {
     public int betPrice;
     public String experience;
     public int total;
+    public int totalPrice = 0;
     public HashMap<String, Integer> usersCharge = new HashMap<>();
-
     public int readyPlayers = 0;
 
     // NodeList
