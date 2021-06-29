@@ -58,6 +58,9 @@ public class UI {
     private ScrollList scrollList = null;
     private int ticketDate = 1;
 
+    private boolean gameDone;
+    private Game g;
+
     private final int WindowSize = 768;
 
     public UI() throws IOException, FontFormatException {
@@ -109,6 +112,8 @@ public class UI {
 
     public void startScreen(){ //1
         cleanFrame();
+
+        gameDone = false;
 
         //Text
         tTitle.setText("OCTOPUS ARENA");
@@ -399,6 +404,15 @@ public class UI {
         tCheckIn.setFont(font.deriveFont(16f)); tCheckIn.setForeground(Color.WHITE);
         tCheckIn.setBounds(200, 30+(int) (space*3.5), 300, 30);
 
+        Thread newTh = new Thread(() ->{
+            try {
+                g = new Game(scrollList.currentNode.Octopi, scrollList.currentNode.Octopi.lastElement().getId());
+                Thread.sleep(4000);
+                g.getGameUi().getFrame().setVisible(false);
+            } catch (InterruptedException | IOException | FontFormatException e) {
+                e.printStackTrace();
+            }
+        });
 
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Check_In = e -> checkInScreen();
@@ -406,8 +420,11 @@ public class UI {
             if (scrollList.currentNode.playerList.contains(player)){
                 tCounter.setText("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
 
-                if (clock.ready(player.ticket.date, player.ticket.time) && !scrollList.currentNode.Octopi.isEmpty()){
-                    setGame();
+                if (gameDone) tCounter.setText("<html>FIGHT IN PROGRESS</html>");
+
+                if (clock.ready(player.ticket.date, player.ticket.time) && !scrollList.currentNode.Octopi.isEmpty() && !gameDone){
+                    newTh.start();
+                    gameDone = true;
                     return;
                 }
 
@@ -588,14 +605,6 @@ public class UI {
         panel.add(energySlider);
 
         refreshFrame(checkbg);
-    }
-
-    public void setGame(){
-
-    }
-
-    public void Game(){
-
     }
 
 

@@ -39,11 +39,11 @@ public class Octopus {
 
         //Validation of not a valid space
         if (row < 0 || col < 0 || row >= map.getMatrix().length || col >= map.getMatrix().length || (Arrays.equals(position, new int[]{row, col}))){
-            System.out.println("Missed attack"); //Octopus Misses
+            System.out.println("Octopus id: " + id + " <Stay>"); //Octopus Misses
             return;
         }
 
-        System.out.println("Attack");
+        System.out.println("Octopus id: " + id + " <Attack>");
 
         Octopus o = map.getOctopus(map.getMatrix()[row][col]);
 
@@ -55,11 +55,11 @@ public class Octopus {
     /** Cleans old space and sets new space & current position of the Octopus */
     public void move(int row, int col, Map map){
         if (row < 0 || col < 0 || row >= map.getMatrix().length || col >= map.getMatrix().length){
-            System.out.println("Missed move"); //Octopus Misses
+            System.out.println("Octopus id: " + id + " <Stay>"); //Octopus Misses
             return;
         }
 
-        System.out.println("Move");
+        System.out.println("Octopus id: " + id + " <Move>");
 
         map.setMatrixSpace(position[0],position[1],0);
         map.setMatrixSpace(row,col,id);

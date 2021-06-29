@@ -10,9 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Game {
 
+    private GameUI gameUi;
+
     public Game(Vector<Octopus> octopuses, int id) throws InterruptedException, IOException, FontFormatException {
         Map map = new Map(octopuses);
-        GameUI gameUi = new GameUI();
+        gameUi = new GameUI();
         int turns, alive;
 
         long starttime = System.nanoTime();
@@ -49,6 +51,8 @@ public class Game {
         }
 
     }
+
+    public GameUI getGameUi(){return gameUi;}
 
     public static void main(String[] args) throws InterruptedException, IOException, FontFormatException {
         Vector<Octopus> os = new Vector<>();

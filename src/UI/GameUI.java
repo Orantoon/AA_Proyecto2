@@ -132,4 +132,6 @@ public class GameUI {
 
         textP.add(tbg);
     }
+
+    public JFrame getFrame(){return frame;}
 }
