@@ -7,12 +7,16 @@ public class Octopus {
     private final int[] attributes; //Life, attack, speed/turns
     private int[] position;
     private long time;
+    private String user;
+    private int bet;
     //private userid, nickname, USUARIO EN SI
 
-    public Octopus(int energy, int id){ //energy from 20 to 100 //ids must start from 1 to X
+    public Octopus(int energy, int id, String user, int bet){ //energy from 20 to 100 //ids must start from 1 to X
         this.id = id;
         int plays = 3 - (energy-20)/40;
         attributes = new int[]{energy, 100/energy, plays};
+        this.user = user;
+        this.bet = bet;
     }
 
 

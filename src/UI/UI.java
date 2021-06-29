@@ -1,5 +1,9 @@
 package UI;
 
+import GameLogic.Game;
+import GameLogic.Map;
+import GameLogic.Octopus;
+import GeneticA.GeneticAlgorithm;
 import Graphs.Graph;
 import Graphs.ScrollList;
 import Players.Player;
@@ -14,7 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.management.PlatformLoggingMXBean;
 import java.text.ParseException;
-import java.lang.Math;
+import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 public class UI {
     //Frame and panels
@@ -60,7 +65,7 @@ public class UI {
 
         int Width = WindowSize + 14, Height = WindowSize + 35;
 
-        frame.setTitle("Menu");
+        frame.setTitle("Octopus Arena");
         frame.setSize(Width, Height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -203,10 +208,10 @@ public class UI {
         int space = 70;
 
         //Data
-        if (player == null){
+        //if (player == null){
             player = new Player();
             // new random nickname
-        }
+        //}
 
         //Text
         tTitle.setText("REGISTER");
@@ -268,8 +273,8 @@ public class UI {
 
             //player.ticket.print();
 
-            player.ticket.date = new int[]{28,6,2021};
-            player.ticket.time = new int[]{4,23,0};
+            //player.ticket.date = new int[]{28,6,2021}; /////////////////////////////////////////////////////////////////
+            //player.ticket.time = new int[]{4,23,0};
 
             // New Nickname ==========
             if (player.nickname == null) {
@@ -336,9 +341,6 @@ public class UI {
         tNick.setText("<html>Nickname: " + player.nickname + "</html>");
         tNick.setBounds(20, 15, 600, 30);
 
-        // FOR GETTING TICKET IN 5 MINUTES
-        //player.ticket.time = new int[]{15, 58, 30}; ///////////////////////////////////////////////////////////////////// function to generate
-
         tNormal.setText("<html>Fight Date: " + player.ticket.getDate() + "</html>");
         tNormal.setBounds(200, 30+(int)(space*2.5), 310, 30);
 
@@ -401,9 +403,15 @@ public class UI {
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener Check_In = e -> checkInScreen();
         ActionListener UpdateTime = e -> {
-            if (scrollList.currentNode.playerList.contains(player))
+            if (scrollList.currentNode.playerList.contains(player)){
                 tCounter.setText("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
-            else
+
+                if (clock.ready(player.ticket.date, player.ticket.time) && !scrollList.currentNode.Octopi.isEmpty()){
+                    setGame();
+                    return;
+                }
+
+            } else
                 tCounter.setText("Time Remaining: NOT YOUR ARENA");
 
             frame.revalidate();
@@ -431,8 +439,6 @@ public class UI {
         bBack.setBounds(335 - smallSize[0]/2,215 + space*3,bigSize[0],bigSize[1]);
         bBack.addActionListener(Start);
 
-        bBack.setEnabled(!player.checkInReady);
-
         // / / / / / / / / / / / / / / / / / / / / / / / Mouse Listener -- SCROLL
         MouseWheelListener scroll = e -> {
             //System.out.println(e.getWheelRotation()); //-1 UP <> 1 DOWN --> Use to move around the graph
@@ -442,7 +448,7 @@ public class UI {
                 scrollList.back();
 
             //System.out.println(scrollList.currentNode.id);
-            refreshScrolls(tPrice, tTotal, tReady, symbol, tCheckIn, bCheckIn, bBack);
+            refreshScrolls(tPrice, tTotal, tReady, symbol, tCheckIn, bCheckIn);
 
         };
 
@@ -463,7 +469,7 @@ public class UI {
         refreshFrame(scrollbg);
     }
 
-    public void refreshScrolls(JLabel  tPrice, JLabel tTotal, JLabel tReady, char symbol, JLabel tCheckIn, JButton bCheckIn, JButton bBack){
+    public void refreshScrolls(JLabel  tPrice, JLabel tTotal, JLabel tReady, char symbol, JLabel tCheckIn, JButton bCheckIn){
         tPrice.setText("<html>Price: " + scrollList.currentNode.betPrice +"</html>");
         tTotal.setText("<html>Total Players: " + scrollList.currentNode.total +"</html>");
         tReady.setText("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
@@ -471,7 +477,6 @@ public class UI {
         tCheckIn.setText("<html>Check-in done: " + symbol +"</html>");
 
         bCheckIn.setEnabled(!player.checkInReady && scrollList.currentNode.playerList.contains(player));
-        bBack.setEnabled(!player.checkInReady);
 
         frame.revalidate();
         frame.repaint();
@@ -548,6 +553,10 @@ public class UI {
 
             //System.out.println(energySlider.getValue());
             //System.out.println(amountBox.getSelectedIndex() + 1);
+
+            //Add octopus
+            scrollList.currentNode.Octopi.add(new Octopus(energySlider.getValue(), scrollList.currentNode.getReady()+1, player.nickname, bet));
+
             player.checkInReady = true;
             player.credits -= bet;
             scrollScreen();
@@ -581,7 +590,16 @@ public class UI {
         refreshFrame(checkbg);
     }
 
-    public void fightResultsScreen(){ //7
+    public void setGame(){
+
+    }
+
+    public void Game(){
+
+    }
+
+
+    public void fightResultsScreen() throws InterruptedException, FontFormatException, IOException { //7
         cleanFrame();
 
         graph.nodeList.cleanNodes();    // Resets arenas and scroll list
@@ -593,7 +611,7 @@ public class UI {
         refreshFrame(endgamebg);
     }
 
-    ActionListener Start = e -> registerScreen(); //Goes to the start (Register Screen)
+    ActionListener Start = e -> startScreen(); //registerScreen(); //Goes to the start (Register Screen)
 
 
     public static void main(String[] args) throws IOException, FontFormatException {

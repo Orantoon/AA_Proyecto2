@@ -1,5 +1,6 @@
 package Arenas;
 
+import GameLogic.Octopus;
 import Players.Player;
 
 import java.util.Vector;
@@ -28,8 +29,12 @@ public class ArenaNode {
     public ArenaNode back;
     public ArenaNode next;
 
+    //Octopuses
+    public Vector<Octopus> Octopi;
+
     public ArenaNode(int id, String ticketDay, String timeZone, int fightSize, int betPrice, String experience){
         playerList = new Vector<Player>();
+        Octopi = new Vector<>();
 
         this.id = id;
         this.ticketDay = ticketDay;

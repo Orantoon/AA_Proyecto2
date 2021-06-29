@@ -10,11 +10,16 @@ public class Ticket {
     public int[] time = new int[3];
 
     public Ticket(int weekDate){
-        newDate(weekDate);
+        //newDate(weekDate); //Lo hace realmente
 
-        time[0] = 15;   // 03 : 00 : 00 pm
-        time[1] = 0;
-        time[2] = 0;
+        //Para revision ////////////////////////////////////////////////////////////////////////////////////////////////
+
+        date = new int[]{28,6,2021};
+        time[0] = 17;   // 04 : 25 : 00 pm
+        time[1] = 13;
+        time[2] = 30;
+
+
     }
 
     public void newDate(int weekDate){
