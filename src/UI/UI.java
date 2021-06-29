@@ -308,13 +308,14 @@ public class UI {
                     }
 
                     playersFile.addNewPlayer(player);
+                    player.credits = (float) 1000.00;
 
                 } catch (IOException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
-            } else {
-                player.credits = (float) 1000.00;
-            }
+            } //else {
+              //  player.credits = (float) 1000.00;
+            //}
 
 
             // New Arena ==========
@@ -656,7 +657,7 @@ public class UI {
             players[i].setText("#"+(i+1)+". "+nickname+" Time: "+o.getTime());
             players[i].setBounds(20, 120+space*i, 600, 30);
 
-            credit = (numP - (i+1)) / total;
+            credit = total / (i+1);
             Player p = playersFile.getPlayer(nickname, playersFile.existingPlayer(nickname));
             playersFile.savePlayer(nickname, p.timeZone, p.credits + credit, p.matchesPlayed + 1);
 

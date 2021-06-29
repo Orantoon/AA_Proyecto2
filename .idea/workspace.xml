@@ -25,31 +25,10 @@
     <list default="true" id="99c8ee09-f37e-4473-947e-3eb8018dad57" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/DistributionLogic/Distribute.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/DistributionLogic/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Files/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Models/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/ParallelsA/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/Players/Ticket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/ProbabilisticA/ScrollList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Program/Menu.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/UI/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AA_Proyecto2/UI/UI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Utils/FileRead.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AA_Proyecto2/Utils/PlayersFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Arenas/ArenaNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Arenas/ArenaNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DistributionLogic/Distribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DistributionLogic/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Files/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/txt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ParallelsA/ControlUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParallelsA/ControlUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Players/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Players/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Players/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProbabilisticA/ScrollList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program/Menu.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/FileRead.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Files/FileRead.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/PlayersFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Files/PlayersFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,32 +189,32 @@
     <state x="260" y="298" key="FileChooserDialogImpl/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1624404610112" />
     <state x="260" y="298" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1623641198836" />
     <state x="347" y="298" key="FileChooserDialogImpl/0.0.2560.1080@0.0.2560.1080" timestamp="1623654366008" />
-    <state width="1877" height="258" key="GridCell.Tab.0.bottom" timestamp="1625008447671">
+    <state width="1877" height="258" key="GridCell.Tab.0.bottom" timestamp="1625010819195">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.bottom/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="258" key="GridCell.Tab.0.bottom/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625008447671" />
+    <state width="1877" height="258" key="GridCell.Tab.0.bottom/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625010819195" />
     <state width="1234" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="292" key="GridCell.Tab.0.bottom/0.0.2560.1080@0.0.2560.1080" timestamp="1624875761131" />
-    <state width="1877" height="258" key="GridCell.Tab.0.center" timestamp="1625008447671">
+    <state width="1877" height="258" key="GridCell.Tab.0.center" timestamp="1625010819195">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.center/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="258" key="GridCell.Tab.0.center/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625008447671" />
+    <state width="1877" height="258" key="GridCell.Tab.0.center/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625010819195" />
     <state width="1234" height="294" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="292" key="GridCell.Tab.0.center/0.0.2560.1080@0.0.2560.1080" timestamp="1624875761131" />
-    <state width="1877" height="258" key="GridCell.Tab.0.left" timestamp="1625008447670">
+    <state width="1877" height="258" key="GridCell.Tab.0.left" timestamp="1625010819194">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.left/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="258" key="GridCell.Tab.0.left/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625008447670" />
+    <state width="1877" height="258" key="GridCell.Tab.0.left/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625010819194" />
     <state width="1234" height="294" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="292" key="GridCell.Tab.0.left/0.0.2560.1080@0.0.2560.1080" timestamp="1624875761131" />
-    <state width="1877" height="258" key="GridCell.Tab.0.right" timestamp="1625008447671">
+    <state width="1877" height="258" key="GridCell.Tab.0.right" timestamp="1625010819195">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1237" height="41" key="GridCell.Tab.0.right/-1920.0.1280.720/0.0.1920.1080@-1920.0.1280.720" timestamp="1623741651014" />
-    <state width="1877" height="258" key="GridCell.Tab.0.right/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625008447671" />
+    <state width="1877" height="258" key="GridCell.Tab.0.right/-1920.0.1280.720/0.0.1920.1080@0.0.1920.1080" timestamp="1625010819195" />
     <state width="1234" height="294" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1623641202497" />
     <state width="1234" height="292" key="GridCell.Tab.0.right/0.0.2560.1080@0.0.2560.1080" timestamp="1624875761131" />
     <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1624415525061">
