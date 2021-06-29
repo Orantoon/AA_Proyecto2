@@ -3,6 +3,7 @@ package Arenas;
 import GameLogic.Octopus;
 import Players.Player;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 public class ArenaNode {
@@ -16,6 +17,9 @@ public class ArenaNode {
     public int betPrice;
     public String experience;
     public int total;
+    public HashMap<String, Integer> usersCharge = new HashMap<>();
+
+    public int readyPlayers = 0;
 
     // NodeList
     public ArenaNode nextN; // Node List

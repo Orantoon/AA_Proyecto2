@@ -1,0 +1,16 @@
+Josh^CST^12000.0^1
+Jack^CST^10000.0^0
+JACKIE^CST^12000.0^1
+Magnus-Randall^EST^1000.0^0
+Odilon-Sergio^EST^1000.0^0
+Eliberto-Jonatas^AST^1000.0^0
+Figaro-Miron^EST^1000.0^0
+Matusael-Bonfilio^AST^950.0^0
+Odon-Ramon^AST^450.0^0
+Bjorn-Gerardo^CST^750.0^0
+Jose-Rodulfo^EST^650.0^0
+Harold-Gunther^EST^1000.0^0
+Medir-Otoniel^EST^950.0^0
+Reinoldo-Menahem^AST^1000.0^0
+Bernardo-Menajem^CST^1000.0^0
+Alexander-Sergio^EST^1000.0^0

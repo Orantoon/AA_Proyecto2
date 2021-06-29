@@ -53,11 +53,10 @@ public class FileRead {
     }
 
     public void writeLine (String fileName, String text) throws IOException {
-        File file = getFile(fileName);
+        //File file = getFile(fileName);
+        //text = text.concat(readFile(fileName) + text);
 
-        text = text.concat(readFile(fileName) + text);
-
-        FileWriter fileWriter = new FileWriter(path + fileName + ".txt");
+        FileWriter fileWriter = new FileWriter(path + fileName + ".txt", true);
         fileWriter.write(text + "\n");
         fileWriter.close();
     }

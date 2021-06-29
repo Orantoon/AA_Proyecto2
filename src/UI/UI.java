@@ -9,6 +9,7 @@ import Graphs.ScrollList;
 import Players.Player;
 import Players.Ticket;
 import Utils.Clock;
+import Utils.PlayersFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,6 +61,8 @@ public class UI {
 
     private boolean gameDone;
     private Game g;
+    private final PlayersFile playersFile = new PlayersFile();
+    private boolean fromLogIn = false;
 
     private final int WindowSize = 768;
 
@@ -122,7 +125,7 @@ public class UI {
         // / / / / / / / / / / / / / / / / / / / / / / / Action Listeners
         ActionListener EXIT = e -> System.exit(0);
         ActionListener Register = e -> {
-            registerScreen();
+            paragraphScreen();
         };
         ActionListener LogIn = e -> logInScreen();
 
@@ -175,14 +178,28 @@ public class UI {
         ActionListener Start = e -> startScreen();
 
         ActionListener Continue = e -> {
-            player = new Player();
+            String nickname = getNick.getText();
+            int line = 0;
+
+            try { line = playersFile.existingPlayer(nickname); }
+            catch (FileNotFoundException fileNotFoundException) { fileNotFoundException.printStackTrace(); }
+
+            if (line == -1){
+                getNick.setText("Incorrect Username, Try Again...");
+                return;
+            }
+
+
+            try { player = playersFile.getPlayer(nickname, playersFile.existingPlayer(nickname)); }
+            catch (FileNotFoundException fileNotFoundException) { fileNotFoundException.printStackTrace(); }
+
             //player = findplayer();
             //gets the data of the player -> nickname, credits
             //if username incorrect ->
-            //getNick.setText("Incorrect Username, Try Again...");
+            //
             //else
-
-            registerScreen();
+            fromLogIn = true;
+            paragraphScreen();
         };
 
         //Buttons
@@ -207,19 +224,22 @@ public class UI {
         refreshFrame(loginbg);
     }
 
-    public void registerScreen() { //2
+    public void paragraphScreen() { //2
         cleanFrame();
 
         int space = 70;
 
         //Data
-        //if (player == null){
+        if (player == null || !fromLogIn){
             player = new Player();
+            fromLogIn = false;
             // new random nickname
-        //}
+        }
+
+        player.checkInReady = false;
 
         //Text
-        tTitle.setText("REGISTER");
+        tTitle.setText("PARAGRAPH");
         tTitle.setBounds(315,30, 400, 40);
 
         //Paragraph specifications
@@ -231,7 +251,7 @@ public class UI {
         tNormal.setBounds(50, 20+space*3, 900, 500);
 
         tCredits.setText("Credits: " + player.credits);
-        tCredits.setBounds(600, 15, 300, 30);
+        tCredits.setBounds(560, 15, 300, 30);
 
         //Text Area
         JTextArea textArea = new JTextArea("Write your description here...");
@@ -285,9 +305,19 @@ public class UI {
             if (player.nickname == null) {
                 try {
                     player.randNickname();
-                } catch (FileNotFoundException fileNotFoundException) {
+
+                    // Validating repeated nicknames
+                    while (playersFile.existingPlayer(player.nickname) != -1){
+                        player.randNickname();
+                    }
+
+                    playersFile.addNewPlayer(player);
+
+                } catch (IOException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
+            } else {
+                player.credits = (float) 1000.00;
             }
 
 
@@ -387,7 +417,7 @@ public class UI {
         tPrice.setFont(font.deriveFont(16f)); tPrice.setForeground(Color.WHITE);
         tPrice.setBounds(200, 30 + (int) (space*1.5), 300, 30);
 
-        JLabel tCounter = new JLabel("<html>Time Remaining: " + clock.timeLeft(player.ticket.date,player.ticket.time) +"</html>");
+        JLabel tCounter = new JLabel("<html>Time Remaining: " + clock.timeLeft(player.ticket.date, player.ticket.time) +"</html>");
         tCounter.setFont(font.deriveFont(16f)); tCounter.setForeground(Color.WHITE);
         tCounter.setBounds(200, 30+space*2, 600, 30);
 
@@ -395,7 +425,7 @@ public class UI {
         tTotal.setFont(font.deriveFont(16f)); tTotal.setForeground(Color.WHITE);
         tTotal.setBounds(200, 30+(int) (space*2.5), 300, 30);
 
-        JLabel tReady = new JLabel("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
+        JLabel tReady = new JLabel("<html>Players Ready: " + scrollList.currentNode.readyPlayers +"</html>");
         tReady.setFont(font.deriveFont(16f)); tReady.setForeground(Color.WHITE);
         tReady.setBounds(200, 30+space*3, 300, 30);
 
@@ -409,6 +439,7 @@ public class UI {
                 g = new Game(scrollList.currentNode.Octopi, scrollList.currentNode.Octopi.lastElement().getId());
                 Thread.sleep(4000);
                 g.getGameUi().getFrame().setVisible(false);
+                fightResultsScreen();
             } catch (InterruptedException | IOException | FontFormatException e) {
                 e.printStackTrace();
             }
@@ -489,7 +520,7 @@ public class UI {
     public void refreshScrolls(JLabel  tPrice, JLabel tTotal, JLabel tReady, char symbol, JLabel tCheckIn, JButton bCheckIn){
         tPrice.setText("<html>Price: " + scrollList.currentNode.betPrice +"</html>");
         tTotal.setText("<html>Total Players: " + scrollList.currentNode.total +"</html>");
-        tReady.setText("<html>Players Ready: " + scrollList.currentNode.getReady() +"</html>");
+        tReady.setText("<html>Players Ready: " + scrollList.currentNode.readyPlayers +"</html>");
         symbol = (player.checkInReady)? '✓': 'X';
         tCheckIn.setText("<html>Check-in done: " + symbol +"</html>");
 
@@ -544,26 +575,15 @@ public class UI {
         ActionListener Back = e -> scrollScreen();
 
         ActionListener CheckIn = e -> {
-            int bet = 0;
-            switch (amountBox.getSelectedIndex() + 1){
-                case 1:
-                    bet = 10;
-                    break;
-                case 2:
-                    bet = 25;
-                    break;
-                case 3:
-                    bet = 50;
-                    break;
-                case 4:
-                    bet = 100;
-                    break;
-                case 5:
-                    bet = 500;
-                    break;
-                case 6:
-                    bet = 1000;
-            }
+            int bet = switch (amountBox.getSelectedIndex() + 1) {
+                case 1 -> 10;
+                case 2 -> 25;
+                case 3 -> 50;
+                case 4 -> 100;
+                case 5 -> 500;
+                case 6 -> 1000;
+                default -> 0;
+            };
 
             if (bet < scrollList.currentNode.betPrice || bet > player.credits)
                 return;
@@ -572,10 +592,18 @@ public class UI {
             //System.out.println(amountBox.getSelectedIndex() + 1);
 
             //Add octopus
-            scrollList.currentNode.Octopi.add(new Octopus(energySlider.getValue(), scrollList.currentNode.getReady()+1, player.nickname, bet));
+            scrollList.currentNode.Octopi.add(new Octopus(energySlider.getValue(), scrollList.currentNode.readyPlayers+1, player.nickname, bet));
 
             player.checkInReady = true;
             player.credits -= bet;
+
+            try { playersFile.savePlayer(player.nickname, player.timeZone, player.credits, player.matchesPlayed); } //Overwrite data
+            catch (IOException ioException) { ioException.printStackTrace(); }
+
+            scrollList.currentNode.readyPlayers++;
+            scrollList.currentNode.total += bet;
+            scrollList.currentNode.usersCharge.put(player.nickname, bet);
+
             scrollScreen();
         };
 
@@ -611,13 +639,51 @@ public class UI {
     public void fightResultsScreen() throws InterruptedException, FontFormatException, IOException { //7
         cleanFrame();
 
-        graph.nodeList.cleanNodes();    // Resets arenas and scroll list
-        scrollList = null;
-        player.clean();
-
         // player + winnings
+        int space = 50;
+
+        tTitle.setText("Rankings");
+
+        Vector<Octopus> octopuses = g.getOctopuses();
+
+        //Distribute winning
+        int total = scrollList.currentNode.total, credit, numP = octopuses.size();
+        String nickname;
+
+        JLabel[] players = new JLabel[10];
+        for (int i = 0; i < octopuses.size(); i++){
+            Octopus o = octopuses.get(i);
+            nickname = o.getUser();
+
+            players[i] = new JLabel();
+            players[i].setFont(font.deriveFont(16f)); players[i].setForeground(Color.WHITE);
+            players[i].setText("#"+(i+1)+". "+nickname+" Time: "+o.getTime());
+            players[i].setBounds(20, 120+space*i, 600, 30);
+
+            credit = (numP - (i+1)) / total;
+            Player p = playersFile.getPlayer(nickname, playersFile.existingPlayer(nickname));
+            playersFile.savePlayer(nickname, p.timeZone, p.credits + credit, p.matchesPlayed + 1);
+
+            panel.add(players[i]);
+        }
+
+        //Buttons
+        JButton bBack = new JButton(bigB);
+        bBack.setText("<html><p color='white' style='font-size:16' face='pixelmix Regular'> Back </p></html>");
+        bBack.setHorizontalTextPosition(SwingConstants.CENTER);
+        bBack.setBounds(502 - smallSize[0]/2,100 + space*4,bigSize[0],bigSize[1]);
+        bBack.addActionListener(Start);
+
+
+        panel.add(tTitle);
+        panel.add(bBack);
 
         refreshFrame(endgamebg);
+
+
+        graph.nodeList.cleanNodes();    // Resets arenas and scroll list
+        //scrollList = null; //ERROR
+        player.clean();
     }
 
     ActionListener Start = e -> startScreen(); //registerScreen(); //Goes to the start (Register Screen)
@@ -629,11 +695,3 @@ public class UI {
 
 }
 
-/*
-Price? In arenas
-Number of Players?
-
-done/check in confirmation for each user
-Vector of Octopus for each arena
-
- */

@@ -93,6 +93,7 @@ public class Octopus {
     public int getPlays(){ return attributes[2]; }
     public long getTime() { return time; }
     public void setTime(long starttime){ time = System.nanoTime() - starttime; }
+    public String getUser(){ return user; }
 }
 
 /* Pulpo que llega a 0 de energia muere y se guarda el tiempo que duro */

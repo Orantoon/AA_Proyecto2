@@ -5,14 +5,18 @@ import UI.GameUI;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
 
     private GameUI gameUi;
+    private Vector<Octopus> octopuses;
 
     public Game(Vector<Octopus> octopuses, int id) throws InterruptedException, IOException, FontFormatException {
+        this.octopuses = octopuses;
         Map map = new Map(octopuses);
         gameUi = new GameUI();
         int turns, alive;
@@ -50,7 +54,22 @@ public class Game {
             System.out.println("Id: " + o.getId() + " Time: " + o.getTime());
         }
 
+        octopuses.sort(compareByTime);
+
     }
+
+    Comparator<Octopus> compareByTime = new Comparator<Octopus>() {
+        @Override
+        public int compare(Octopus o1, Octopus o2) {
+            if (o1.getTime() == o2.getTime())
+                return 0;
+            else if (o1.getTime() > o2.getTime())
+                return -1;
+            return 1;
+        }
+    };
+
+    public Vector<Octopus> getOctopuses(){ return octopuses; }
 
     public GameUI getGameUi(){return gameUi;}
 
